@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Linux 环境下 MySQL 的安装与使用 - 我的全新 Hugo 网站</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Linux 环境下 MySQL 的安装与使用" />
+<meta property="og:description" content="介绍 关系型数据库 1 安装 1.1 通过二进制包安装 安装依赖 yum install libaio numactl 获取通用二进制包 wget https://downloads.mysql.com/archives/get/p/23/file/mysql-8.0.33-linux-glibc2.28-x86_64.tar.gz 创建 MySQL 组 groupadd -g 27 -o -r mysql 创建 MySQL 用户 useradd -M -N -g mysql -o -r -d /usr/local/mysql/data -s /bin/false -c &#34;MySQL Server&#34; -u 27 mysql" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/ops/chapter18/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-01-04T15:00:00+08:00" />
+<meta property="article:modified_time" content="2025-01-04T15:00:00+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Linux 环境下 MySQL 的安装与使用"/>
+<meta name="twitter:description" content="介绍 关系型数据库 1 安装 1.1 通过二进制包安装 安装依赖 yum install libaio numactl 获取通用二进制包 wget https://downloads.mysql.com/archives/get/p/23/file/mysql-8.0.33-linux-glibc2.28-x86_64.tar.gz 创建 MySQL 组 groupadd -g 27 -o -r mysql 创建 MySQL 用户 useradd -M -N -g mysql -o -r -d /usr/local/mysql/data -s /bin/false -c &#34;MySQL Server&#34; -u 27 mysql"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/ops/chapter18/" /><link rel="prev" href="http://example.org/posts/ops/chapter17/" /><link rel="next" href="http://example.org/posts/other/chapter11/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Linux 环境下 MySQL 的安装与使用",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/ops\/chapter18\/"
+        },"genre": "posts","keywords": "linux, mysql","wordcount":  372 ,
+        "url": "http:\/\/example.org\/posts\/ops\/chapter18\/","datePublished": "2025-01-04T15:00:00+08:00","dateModified": "2025-01-04T15:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "strr0"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux 环境下 MySQL 的安装与使用</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-01-04">2025-01-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;372 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#1-安装">1 安装</a>
+      <ul>
+        <li><a href="#11-通过二进制包安装">1.1 通过二进制包安装</a></li>
+        <li><a href="#12-通过-docker-安装">1.2 通过 Docker 安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-使用">2 使用</a>
+      <ul>
+        <li><a href="#21-基础操作">2.1 基础操作</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="介绍">介绍</h2>
+<p>关系型数据库</p>
+<h2 id="1-安装">1 安装</h2>
+<h3 id="11-通过二进制包安装">1.1 通过二进制包安装</h3>
+<p>安装依赖</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install libaio numactl
+</span></span></code></pre></div><p>获取通用二进制包</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-8.0.33-linux-glibc2.28-x86_64.tar.gz
+</span></span></code></pre></div><p>创建 MySQL 组</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">groupadd -g <span class="m">27</span> -o -r mysql
+</span></span></code></pre></div><p>创建 MySQL 用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">useradd -M -N -g mysql -o -r -d /usr/local/mysql/data -s /bin/false -c <span class="s2">&#34;MySQL Server&#34;</span> -u <span class="m">27</span> mysql
+</span></span></code></pre></div><p>解压二进制包</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar -zxvf mysql-8.0.33-linux-glibc2.28-x86_64.tar.gz
+</span></span><span class="line"><span class="cl">mv mysql-8.0.33-linux-glibc2.28-x86_64 /usr/local/mysql
+</span></span></code></pre></div><p>设置 PATH 变量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/usr/local/mysql/bin:<span class="nv">$PATH</span>
+</span></span></code></pre></div><p>创建安全目录（用于导入导出）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /usr/local/mysql
+</span></span><span class="line"><span class="cl">mkdir mysql-files
+</span></span><span class="line"><span class="cl">chown mysql:mysql mysql-files
+</span></span><span class="line"><span class="cl">chmod <span class="m">750</span> mysql-files
+</span></span></code></pre></div><p>创建配置文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /etc
+</span></span><span class="line"><span class="cl">touch my.cnf
+</span></span><span class="line"><span class="cl">chown root:root my.cnf
+</span></span><span class="line"><span class="cl">chmod <span class="m">644</span> my.cnf
+</span></span></code></pre></div><p>添加配置到 my.cnf 文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>mysqld<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">datadir</span><span class="o">=</span>/usr/local/mysql/data
+</span></span><span class="line"><span class="cl"><span class="nv">socket</span><span class="o">=</span>/tmp/mysql.sock
+</span></span><span class="line"><span class="cl"><span class="nv">port</span><span class="o">=</span><span class="m">3306</span>
+</span></span><span class="line"><span class="cl">log-error<span class="o">=</span>/usr/local/mysql/data/localhost.localdomain.err
+</span></span><span class="line"><span class="cl"><span class="nv">user</span><span class="o">=</span>mysql
+</span></span><span class="line"><span class="cl"><span class="nv">secure_file_priv</span><span class="o">=</span>/usr/local/mysql/mysql-files
+</span></span><span class="line"><span class="cl"><span class="nv">local_infile</span><span class="o">=</span>OFF
+</span></span></code></pre></div><p>创建数据目录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /usr/local/mysql
+</span></span><span class="line"><span class="cl">mkdir data
+</span></span><span class="line"><span class="cl">chmod <span class="m">750</span> data
+</span></span><span class="line"><span class="cl">chown mysql:mysql data
+</span></span></code></pre></div><p>初始化</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /usr/local/mysql
+</span></span><span class="line"><span class="cl">bin/mysqld --defaults-file<span class="o">=</span>/etc/my.cnf --initialize
+</span></span></code></pre></div><p>初始化日志（包含初始密码）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /usr/local/mysql/data/localhost.localdomain.err
+</span></span></code></pre></div><p>创建 service 配置文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /usr/lib/systemd/system
+</span></span><span class="line"><span class="cl">touch mysqld.service
+</span></span><span class="line"><span class="cl">chmod <span class="m">644</span> mysqld.service
+</span></span></code></pre></div><p>添加配置到 mysqld.service 文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>Unit<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Description</span><span class="o">=</span>MySQL Server
+</span></span><span class="line"><span class="cl"><span class="nv">Documentation</span><span class="o">=</span>man:mysqld<span class="o">(</span>8<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Documentation</span><span class="o">=</span>http://dev.mysql.com/doc/refman/en/using-systemd.html
+</span></span><span class="line"><span class="cl"><span class="nv">After</span><span class="o">=</span>network.target
+</span></span><span class="line"><span class="cl"><span class="nv">After</span><span class="o">=</span>syslog.target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Install<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">User</span><span class="o">=</span>mysql
+</span></span><span class="line"><span class="cl"><span class="nv">Group</span><span class="o">=</span>mysql
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Have mysqld write its state to the systemd notify socket</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span>notify
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Disable service start and stop timeout logic of systemd for mysqld service.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">TimeoutSec</span><span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Start main service</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStart</span><span class="o">=</span>/usr/local/mysql/bin/mysqld --defaults-file<span class="o">=</span>/etc/my.cnf <span class="nv">$MYSQLD_OPTS</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Use this to switch malloc implementation</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EnvironmentFile</span><span class="o">=</span>-/etc/sysconfig/mysql
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Sets open_files_limit</span>
+</span></span><span class="line"><span class="cl"><span class="nv">LimitNOFILE</span> <span class="o">=</span> <span class="m">10000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">Restart</span><span class="o">=</span>on-failure
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">RestartPreventExitStatus</span><span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set environment variable MYSQLD_PARENT_PID. This is required for restart.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Environment</span><span class="o">=</span><span class="nv">MYSQLD_PARENT_PID</span><span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">PrivateTmp</span><span class="o">=</span><span class="nb">false</span>
+</span></span></code></pre></div><h3 id="12-通过-docker-安装">1.2 通过 Docker 安装</h3>
+<p>拉取镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker pull mysql:8.0.31
+</span></span></code></pre></div><p>创建容器并启动</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --name mysql-server <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -p 3306:3306 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -v ./mysql:/var/lib/mysql <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>password <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>&lt;db&gt; <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="nv">MYSQL_USER</span><span class="o">=</span>&lt;user&gt; <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>&lt;pwd&gt; <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    mysql:8.0.31
+</span></span></code></pre></div><h2 id="2-使用">2 使用</h2>
+<h3 id="21-基础操作">2.1 基础操作</h3>
+<p>登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /usr/local/mysql
+</span></span><span class="line"><span class="cl">bin/mysql -uroot -p
+</span></span><span class="line"><span class="cl"><span class="c1"># Enter password: (enter the random root password here)</span>
+</span></span></code></pre></div><p>设置密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">alter user <span class="s1">&#39;root&#39;</span>@<span class="s1">&#39;localhost&#39;</span> identified by <span class="s1">&#39;&lt;password&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 带 caching_sha2_password 加密</span>
+</span></span><span class="line"><span class="cl">alter user <span class="s1">&#39;root&#39;</span>@<span class="s1">&#39;localhost&#39;</span> identified with <span class="s1">&#39;caching_sha2_password&#39;</span> by <span class="s1">&#39;&lt;password&gt;&#39;</span><span class="p">;</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-01-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/ops/chapter18/" data-title="Linux 环境下 MySQL 的安装与使用" data-hashtags="linux,mysql"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/ops/chapter18/" data-hashtag="linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/ops/chapter18/" data-title="Linux 环境下 MySQL 的安装与使用"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/ops/chapter18/" data-title="Linux 环境下 MySQL 的安装与使用"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/ops/chapter18/" data-title="Linux 环境下 MySQL 的安装与使用"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/mysql/">MySQL</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/ops/chapter17/" class="prev" rel="prev" title="数据库版本管理工具 Liquibase"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>数据库版本管理工具 Liquibase</a>
+            <a href="/posts/other/chapter11/" class="next" rel="next" title="远程桌面协议 XRDP">远程桌面协议 XRDP<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

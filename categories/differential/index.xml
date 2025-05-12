@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>常微分方程 - Category - 我的全新 Hugo 网站</title>
+        <link>http://example.org/categories/differential/</link>
+        <description>常微分方程 - Category - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 28 Mar 2023 20:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/differential/" rel="self" type="application/rss+xml" /><item>
+    <title>一阶微分方程的初等解法</title>
+    <link>http://example.org/posts/ode/chapter1/</link>
+    <pubDate>Tue, 28 Mar 2023 20:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ode/chapter1/</guid>
+    <description><![CDATA[1 常见不定积分 $\int x^a dx = \frac{1}{a+1}x^{a+1} + C$ $\int a^x dx = \frac{1}{\ln{a}}a^x + C$ $\int \frac{1}{x} dx = \ln{|x|} + C$ $\int e^x dx = e^x + C$ $\int \cos{x} dx = \sin{x} + C$ $\int \sin{x} dx = -\cos{x} + C$ $\int \frac{1}{\sqrt{1 - x^2}} dx = \arcsin{x} + C$ $\int \frac{1}{1 + x^2} dx = \arctan{x} + C$ $\int {\sec}^2{x} dx]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,87 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>开发 - Category - 我的全新 Hugo 网站</title>
+        <link>http://example.org/categories/development/</link>
+        <description>开发 - Category - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 29 Dec 2024 23:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/development/" rel="self" type="application/rss+xml" /><item>
+    <title>基于 Mybatis Plus 插件实现字段填充</title>
+    <link>http://example.org/posts/dev/chapter17/</link>
+    <pubDate>Sun, 29 Dec 2024 23:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter17/</guid>
+    <description><![CDATA[介绍 在实际开发过程中可能会频繁修改表中的某些基础字段数据（如更新人、更新时间等），通过 Mybatis Plus 插件可以统一对其进行处理，减少冗余代码 1 基础配置 1.1]]></description>
+</item>
+<item>
+    <title>Spring 整合 OAuth2</title>
+    <link>http://example.org/posts/dev/chapter16/</link>
+    <pubDate>Sat, 21 Dec 2024 23:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter16/</guid>
+    <description><![CDATA[介绍 OAuth 协议为用户资源的授权提供了一个安全的、开放而又简易的标准。OAuth 的授权可以使第三方不触及到用户的账号信息（如用户名与密码），即第三]]></description>
+</item>
+<item>
+    <title>Spring 整合 Minio</title>
+    <link>http://example.org/posts/dev/chapter15/</link>
+    <pubDate>Sat, 12 Oct 2024 10:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter15/</guid>
+    <description><![CDATA[介绍 对象存储 1 环境配置 参考 Minio 安装 2 示例 2.1 Spring 配置 添加 application 配置 minio: url: http://localhost:9000 accessKey: admin secretKey: password bucketName: xxx 定义配置类 OssProperties（用于获取配置信息） @Component @ConfigurationProperties(&#34;minio&#34;) public class OssProperties]]></description>
+</item>
+<item>
+    <title>树结构工具类封装</title>
+    <link>http://example.org/posts/dev/chapter14/</link>
+    <pubDate>Tue, 01 Oct 2024 10:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter14/</guid>
+    <description><![CDATA[介绍 树结构工具类封装 1 开始 1.1 可树化接口 /** * 可树化 */ public interface Treeable&lt;T, K&gt; { /** * 获取 id */ K getId(); /** * 获取父级 id */ K getParentId(); /** * 获取子节点 */ List&lt;T&gt; getChildren(); /** * 设置子节点 */ void setChildren(List&lt;T&gt; children); }]]></description>
+</item>
+<item>
+    <title>ShardingSphere 分库分表</title>
+    <link>http://example.org/posts/dev/chapter13/</link>
+    <pubDate>Sat, 20 Jul 2024 10:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter13/</guid>
+    <description><![CDATA[1 介绍 Apache ShardingSphere 是一款分布式 SQL 事务和查询引擎，可通过数据分片、弹性伸缩、加密等能力对任意数据库进行增强。 2 使用 2.1 基础配置和使用 创建 maven 项目，并引入依]]></description>
+</item>
+<item>
+    <title>基于 Sa-Token 实现单点登录</title>
+    <link>http://example.org/posts/dev/chapter12/</link>
+    <pubDate>Sun, 16 Jun 2024 14:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter12/</guid>
+    <description><![CDATA[1 介绍 1.1 Sa-Token Sa-Token 是一个轻量级 Java 权限认证框架，主要解决：登录认证、权限认证、单点登录、OAuth2.0、分布式Session会话、微服务网关鉴权等]]></description>
+</item>
+<item>
+    <title>Spring Batch 批处理框架</title>
+    <link>http://example.org/posts/dev/chapter11/</link>
+    <pubDate>Thu, 14 Mar 2024 15:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter11/</guid>
+    <description><![CDATA[1 介绍 Spring Batch 是一个轻量级的、完善的批处理框架,旨在帮助企业建立健壮、高效的批处理应用。Spring Batch 的核心为一个作业启动器和一个作业主体（Jo]]></description>
+</item>
+<item>
+    <title>Spring 整合 Nacos</title>
+    <link>http://example.org/posts/dev/chapter10/</link>
+    <pubDate>Thu, 11 Jan 2024 23:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter10/</guid>
+    <description><![CDATA[介绍 构建云原生应用的动态服务发现、配置管理和服务管理平台。 1 快速开始 1.1 MySql 环境 参考 MySQL 安装 导入 nacos 数据 1.2 Nacos 环境 参考 Nacos 安装 2 示例 2.1 Spring Cloud 配置中心 引入依]]></description>
+</item>
+<item>
+    <title>Mybatis 浅显解读及基础 CRUD 封装</title>
+    <link>http://example.org/posts/dev/chapter9/</link>
+    <pubDate>Fri, 15 Dec 2023 20:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter9/</guid>
+    <description><![CDATA[介绍 在开始之前，我简单阅读了 Mybatis-plus 的代码，不得不说 Mybatis-plus 是一个非常完善、功能齐全的框架，但是它对原有的 Mybatis 的改动也不小，重写了诸如 Configurat]]></description>
+</item>
+<item>
+    <title>Spring 整合 Redis</title>
+    <link>http://example.org/posts/dev/chapter3/</link>
+    <pubDate>Thu, 30 Nov 2023 10:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter3/</guid>
+    <description><![CDATA[介绍 缓存技术 1 环境配置 参考 Redis 安装 2 示例 2.1 基于 Spring Data 2.1.1 Spring 配置 引入依赖 &lt;dependency&gt; &lt;groupId&gt;org.springframework.data&lt;/groupId&gt; &lt;artifactId&gt;spring-data-redis&lt;/artifactId&gt; &lt;version&gt;${spring-boot.version}&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;redis.clients&lt;/groupId&gt; &lt;artifactId&gt;jedis&lt;/artifactId&gt; &lt;/dependency&gt; application 配置 spring: redis: database: 0 host: localhost port: 6379 password: password jedis: pool: max-active: 8 max-idle: 8 max-wait: -1ms min-idle: 0 RedisTemplate 注入 BookService @Service public]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,87 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Linux - Tag - 我的全新 Hugo 网站</title>
+        <link>http://example.org/tags/linux/</link>
+        <description>Linux - Tag - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 09 Feb 2025 14:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>一加 6T 刷入 Windows 及 Linux 等系统</title>
+    <link>http://example.org/posts/other/chapter12/</link>
+    <pubDate>Sun, 09 Feb 2025 14:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/other/chapter12/</guid>
+    <description><![CDATA[介绍 刷机指南 1 前置准备 1.1 驱动安装 一加手机可以从 daxiaamu 下载驱动 adb 与 fastboot 找不到设备问题：1. 驱动未安装；2. 手动从 此电脑 &gt; 管理 &gt; 设备管理器 选择未识别的]]></description>
+</item>
+<item>
+    <title>远程桌面协议 XRDP</title>
+    <link>http://example.org/posts/other/chapter11/</link>
+    <pubDate>Sun, 05 Jan 2025 20:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/other/chapter11/</guid>
+    <description><![CDATA[介绍 xrdp 使用 Microsoft 远程桌面协议（RDP）为远程计算机提供图形登录 1 安装 安装依赖 yum install finger cmake patch gcc make autoconf libtool automake pkgconfig openssl-devel gettext file \ pam-devel libX11-devel libXfixes-devel libjpeg-devel libXrandr-devel nasm \ flex bison gcc-c++ libxslt perl-libxml-perl xorg-x11-font-utils xmlto-tex 下载源码 wget]]></description>
+</item>
+<item>
+    <title>Linux 环境下 MySQL 的安装与使用</title>
+    <link>http://example.org/posts/ops/chapter18/</link>
+    <pubDate>Sat, 04 Jan 2025 15:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter18/</guid>
+    <description><![CDATA[介绍 关系型数据库 1 安装 1.1 通过二进制包安装 安装依赖 yum install libaio numactl 获取通用二进制包 wget https://downloads.mysql.com/archives/get/p/23/file/mysql-8.0.33-linux-glibc2.28-x86_64.tar.gz 创建 MySQL 组 groupadd -g 27 -o -r mysql 创建 MySQL 用户 useradd -M -N -g mysql -o -r -d /usr/local/mysql/data -s /bin/false -c &#34;MySQL Server&#34; -u 27 mysql]]></description>
+</item>
+<item>
+    <title>Linux 环境下 Docker 的安装与使用</title>
+    <link>http://example.org/posts/ops/chapter1/</link>
+    <pubDate>Sun, 24 Nov 2024 10:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter1/</guid>
+    <description><![CDATA[介绍 Docker Engine 是一种开源容器化技术，用于构建和容器化应用程序。 1 环境要求 64 位系统 内核版本 3.10 及以上 iptables 版本 1.4 及以上 git 版本 1.7 及以上 ps 命令（procps 或]]></description>
+</item>
+<item>
+    <title>Linux 环境下 Nginx 的安装与使用</title>
+    <link>http://example.org/posts/ops/chapter6/</link>
+    <pubDate>Tue, 12 Nov 2024 11:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter6/</guid>
+    <description><![CDATA[介绍 Nginx (engine x) 是一个高性能的 HTTP 和反向代理 web 服务器，同时也提供了 IMAP/POP3/SMTP 服务。 1 安装 1.1 编译环境依赖 Debian 系 apt install gcc zlib1g zlib1g-dev libpcre3-dev libssl-dev Redhat 系 yum install gcc zlib zlib-devel pcre pcre-devel openssl openssl-devel 1.2 获取源码 wget http://nginx.org/download/nginx-1.25.1.tar.gz]]></description>
+</item>
+<item>
+    <title>基础环境配置</title>
+    <link>http://example.org/posts/ops/chapter12/</link>
+    <pubDate>Mon, 11 Nov 2024 17:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter12/</guid>
+    <description><![CDATA[介绍 Linux 开发环境 1 Java 环境 1.1 JDK 8 1.1.1 下载 wget https://download.oracle.com/otn/java/jdk/8u431-b10/0d8f12bc927a4e2c9f8568ca567db4ee/jdk-8u431-linux-x64.tar.gz 1.1.2 安装 解压到指定路径 sudo mkdir /usr/local/java sudo tar -xzvf jdk-8u431-linux-x64.tar.gz -C /usr/local/java 1.1.3 环境变量配置 修改环境变量 # /etc/profile JAVA_HOME=/usr/local/java/jdk1.8.0_431 CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar export JAVA_HOME export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin 应用环境变量 source /etc/profile 1.1.4 验证]]></description>
+</item>
+<item>
+    <title>Linux 环境下 Minio 的安装与使用</title>
+    <link>http://example.org/posts/ops/chapter14/</link>
+    <pubDate>Thu, 01 Aug 2024 10:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter14/</guid>
+    <description><![CDATA[介绍 MinIO 是一种高性能、S3 兼容的对象存储。 1 安装 1.1 通过源码安装 1.1.1 下载 wget https://dl.minio.org.cn/server/minio/release/linux-amd64/minio chmod +x minio sudo mv minio /usr/local/bin/ 1.1.2 启动 MINIO_ROOT_USER=admin MINIO_ROOT_PASSWORD=password minio server /data --address &#34;:9000&#34; --console-address &#34;:9001&#34; 1.2 通过 Docker 安装 1.2.1 拉取镜像 docker pull minio/minio:RELEASE.2023-03-24T21-41-23Z 1.2.2 运]]></description>
+</item>
+<item>
+    <title>Jenkins 自动化部署</title>
+    <link>http://example.org/posts/ops/chapter13/</link>
+    <pubDate>Fri, 12 Jul 2024 15:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter13/</guid>
+    <description><![CDATA[介绍 Jenkins 是一个开源软件项目，是基于 Java 开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件项目可以进行持续集成]]></description>
+</item>
+<item>
+    <title>Linux 环境下 MongoDB 的安装与使用</title>
+    <link>http://example.org/posts/ops/chapter5/</link>
+    <pubDate>Thu, 04 Jan 2024 15:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter5/</guid>
+    <description><![CDATA[介绍 非关系型数据库 1 安装 1.1 通过二进制文件安装 1.1.1 下载 wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel8-7.0.16.tgz 1.1.2 解压到指定路径 tar -xzvf mongodb-linux-x86_64-rhel8-7.0.16.tgz sudo cp mongodb-linux-x86_64-rhel80-7.0.16/bin/* /usr/local/bin/ 1.1.3 创建用户及用户组 # groupadd mongod &amp; useradd -g mongod mongod useradd -G mongod mongod 1.1.3 创建数据及日]]></description>
+</item>
+<item>
+    <title>GitLab CI/CD 自动化部署</title>
+    <link>http://example.org/posts/ops/chapter10/</link>
+    <pubDate>Wed, 25 Oct 2023 10:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter10/</guid>
+    <description><![CDATA[介绍 GitLab CI/CD 是 GitLab 提供持续集成服务，主要功能通过一个执行器和作业配置实现，执行器一般不部署在 Gitlab 服务器下，推荐部署到开发环境服务器。将 .gitlab-ci.yml 文件添加到存]]></description>
+</item>
+</channel>
+</rss>

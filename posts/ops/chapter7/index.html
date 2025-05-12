@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Linux 环境下 ByConity 的安装与使用 - 我的全新 Hugo 网站</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Linux 环境下 ByConity 的安装与使用" />
+<meta property="og:description" content="介绍 ByConity 是面向现代 IT 架构变化而设计的一款数仓系统，它采用云原生架构设计，在满足数仓用户对资源弹性扩缩容，读写分离，资源隔离，数据强一致性等多种" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/ops/chapter7/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-11T10:00:00+08:00" />
+<meta property="article:modified_time" content="2023-10-11T10:00:00+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Linux 环境下 ByConity 的安装与使用"/>
+<meta name="twitter:description" content="介绍 ByConity 是面向现代 IT 架构变化而设计的一款数仓系统，它采用云原生架构设计，在满足数仓用户对资源弹性扩缩容，读写分离，资源隔离，数据强一致性等多种"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/ops/chapter7/" /><link rel="prev" href="http://example.org/posts/other/chapter4/" /><link rel="next" href="http://example.org/posts/ops/chapter8/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Linux 环境下 ByConity 的安装与使用",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/ops\/chapter7\/"
+        },"genre": "posts","keywords": "linux","wordcount":  1022 ,
+        "url": "http:\/\/example.org\/posts\/ops\/chapter7\/","datePublished": "2023-10-11T10:00:00+08:00","dateModified": "2023-10-11T10:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "strr0"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux 环境下 ByConity 的安装与使用</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-11">2023-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1022 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#1-在-docker-中部署">1 在 Docker 中部署</a>
+      <ul>
+        <li><a href="#11-环境要求">1.1 环境要求</a></li>
+        <li><a href="#12-docker-镜像可提前拉取镜像">1.2 docker 镜像（可提前拉取镜像）</a></li>
+        <li><a href="#13-运行-byconity">1.3 运行 ByConity</a></li>
+        <li><a href="#14-使用-byconity-客户端">1.4 使用 ByConity 客户端</a></li>
+        <li><a href="#15-验证部署">1.5 验证部署</a></li>
+        <li><a href="#16-数据导入">1.6 数据导入</a></li>
+        <li><a href="#17-停止-byconity">1.7 停止 ByConity</a></li>
+        <li><a href="#18-配置修改及问题修复">1.8 配置修改及问题修复</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-在-k8s-中部署">2 在 K8S 中部署</a>
+      <ul>
+        <li><a href="#21-环境要求">2.1 环境要求</a></li>
+        <li><a href="#22-kind-配置-k8s-集群">2.2 Kind 配置 K8S 集群</a></li>
+        <li><a href="#23-初始化-demo">2.3 初始化 Demo</a></li>
+        <li><a href="#24-从-kubernetes-集群中删除或停止-byconity">2.4 从 Kubernetes 集群中删除或停止 ByConity</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="介绍">介绍</h2>
+<p>ByConity 是面向现代 IT 架构变化而设计的一款数仓系统，它采用云原生架构设计，在满足数仓用户对资源弹性扩缩容，读写分离，资源隔离，数据强一致性等多种需求的同时，并提供优异的查询，写入性能。</p>
+<h2 id="1-在-docker-中部署">1 在 Docker 中部署</h2>
+<h3 id="11-环境要求">1.1 环境要求</h3>
+<ul>
+<li><a href="https://docs.docker.com/engine/" target="_blank" rel="noopener noreffer ">Docker</a></li>
+<li><a href="https://docs.docker.com/compose/" target="_blank" rel="noopener noreffer ">Docker Compose</a></li>
+</ul>
+<h3 id="12-docker-镜像可提前拉取镜像">1.2 docker 镜像（可提前拉取镜像）</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker pull gchq/hdfs:3.3
+</span></span><span class="line"><span class="cl">docker pull foundationdb/foundationdb:7.1.24
+</span></span><span class="line"><span class="cl">docker pull byconity/byconity:0.1.0-GA
+</span></span></code></pre></div><h3 id="13-运行-byconity">1.3 运行 ByConity</h3>
+<p>从 github 获取源代码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/ByConity/byconity-docker.git
+</span></span></code></pre></div><p>使用 docker-compose 运行 ByConity</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> byconity-docker（先进入代码根路径）
+</span></span><span class="line"><span class="cl">docker-compose up -d
+</span></span></code></pre></div><p>测试 server 是否正常工作（返回 1）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl <span class="s1">&#39;127.0.0.1:8123/?query=select%20count()%20from%20system.one&#39;</span>
+</span></span></code></pre></div><p>测试 read worker 是否正常工作（返回 1）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl <span class="s1">&#39;127.0.0.1:8123/?query=select%20count()%20from%20cnch(`vw_default`,system,one)&#39;</span>
+</span></span></code></pre></div><p>测试 write worker 是否正常工作（返回 1）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl <span class="s1">&#39;127.0.0.1:8123/?query=select%20count()%20from%20cnch(`vw_write`,system,one)&#39;</span>
+</span></span></code></pre></div><h3 id="14-使用-byconity-客户端">1.4 使用 ByConity 客户端</h3>
+<p>在 hdfs 创建 clickhouse 用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./hdfs/create_users.sh
+</span></span></code></pre></div><p>进入 docker 容器的 clickhouse</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it server-0 clickhouse-client --port <span class="m">52145</span>
+</span></span></code></pre></div><p>执行语句测试</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">SHOW DATABASES<span class="p">;</span>
+</span></span></code></pre></div><p>复制 docker 客户端至容器外部</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir bin
+</span></span><span class="line"><span class="cl">docker cp server-0:/opt/byconity/bin/clickhouse bin
+</span></span></code></pre></div><h3 id="15-验证部署">1.5 验证部署</h3>
+<p>连接到ByConity server</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bin/clickhouse client --host<span class="o">=</span>&lt;your_server_host&gt; --port<span class="o">=</span>&lt;your_server_tcp_port&gt;  --enable_optimizer<span class="o">=</span><span class="m">1</span> --dialect_type<span class="o">=</span><span class="s1">&#39;ANSI&#39;</span>
+</span></span></code></pre></div><p>确保所有worker正常启动并且被识别</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">system</span><span class="p">.</span><span class="n">workers</span><span class="w">
+</span></span></span></code></pre></div><p>运行一些基本的SQL</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">test</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">USE</span><span class="w"> </span><span class="n">test</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="n">UInt64</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">s</span><span class="o">`</span><span class="w"> </span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CnchMergeTree</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="nb">number</span><span class="p">,</span><span class="w"> </span><span class="n">toString</span><span class="p">(</span><span class="nb">number</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">numbers</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>确保以上运行结果是正常的</p>
+<h3 id="16-数据导入">1.6 数据导入</h3>
+<p>导入数据到指定表</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bin/clickhouse client --query <span class="s2">&#34;INSERT INTO example FORMAT CSV&#34;</span> &lt; example.dat --format_csv_delimiter <span class="s2">&#34;|&#34;</span>
+</span></span></code></pre></div><h3 id="17-停止-byconity">1.7 停止 ByConity</h3>
+<p>停止 ByConity 容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker stop daemon-manager-0 server-0 tso-0 worker-default-0 worker-write-0 fdb-0 hdfs-datanode hdfs-namenode
+</span></span></code></pre></div><p>或停止所有容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker stop <span class="k">$(</span>docker ps -aq<span class="k">)</span>
+</span></span></code></pre></div><h3 id="18-配置修改及问题修复">1.8 配置修改及问题修复</h3>
+<h4 id="181-配置修改">1.8.1 配置修改</h4>
+<p>容器内部的配置文件已经挂载到物理机上，修改配置在物理机上操作即可，如设置用户密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># /&lt;your_directory&gt;/byconity-simple-cluster/users.yml</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">users:
+</span></span><span class="line"><span class="cl">  default:
+</span></span><span class="line"><span class="cl">    networks:
+</span></span><span class="line"><span class="cl">      ip: ::/0
+</span></span><span class="line"><span class="cl">    password: <span class="s2">&#34;new_password&#34;</span>  <span class="c1"># 修改密码为new_password</span>
+</span></span><span class="line"><span class="cl">    profile: default
+</span></span><span class="line"><span class="cl">    quota: default
+</span></span></code></pre></div><h4 id="182-dbnetexception-connection-refused-问题">1.8.2 DB::NetException: Connection refused 问题</h4>
+<p>在 CentOS 7 上可能会遇到 clickhouse-client 连接拒绝，可尝试如下命令登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 进入容器内部</span>
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it server-0 /bin/bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 登录 clikchouse 客户端</span>
+</span></span><span class="line"><span class="cl">clickhouse-client -m -h 127.0.0.1 --port <span class="m">52145</span> --password
+</span></span></code></pre></div><h4 id="183-too-many-open-files-问题">1.8.3 Too many open files 问题</h4>
+<p>遇到 random_device failed to open /dev/urandom: Too many open files 问题，可通过如下命令修改最大允许打开文件数量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">ulimit</span> -n <span class="m">2048</span>
+</span></span></code></pre></div><h4 id="184-access-to-file-denied-问题">1.8.4 Access to file denied 问题</h4>
+<p>遇到 DB::Exception: Access to file denied: Permission denied 问题，可能是由于 hdfs 未创建 clickhouse 用户导致，尝试如下命令创建</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker <span class="nb">exec</span> hdfs-namenode hdfs dfs -mkdir /user
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> hdfs-namenode hdfs dfs -mkdir /user/clickhouse
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> hdfs-namenode hdfs dfs -chown clickhouse /user/clickhouse
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> hdfs-namenode hdfs dfs -chmod -R <span class="m">775</span> /user/clickhouse 
+</span></span></code></pre></div><h2 id="2-在-k8s-中部署">2 在 K8S 中部署</h2>
+<h3 id="21-环境要求">2.1 环境要求</h3>
+<h4 id="211-k8s-环境">2.1.1 K8S 环境</h4>
+<p>更新必要包</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">sudo apt-get install -y apt-transport-https ca-certificates curl
+</span></span></code></pre></div><p>添加 k8s signing key</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key <span class="p">|</span> sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+</span></span></code></pre></div><p>添加 k8s 源</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /&#39;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/kubernetes.list
+</span></span></code></pre></div><p>安装 k8s</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">sudo apt-get install -y kubectl
+</span></span></code></pre></div><h4 id="212-helm-环境">2.1.2 Helm 环境</h4>
+<p>添加 gpg</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl https://baltocdn.com/helm/signing.asc <span class="p">|</span> gpg --dearmor <span class="p">|</span> sudo tee /usr/share/keyrings/helm.gpg &gt; /dev/null
+</span></span></code></pre></div><p>安装 apt-transport-https</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install apt-transport-https --yes
+</span></span></code></pre></div><p>添加源</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main&#34;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+</span></span></code></pre></div><p>安装 helm</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">sudo apt-get install helm
+</span></span></code></pre></div><p>添加 helm 国内源</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">helm repo add stable https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+</span></span><span class="line"><span class="cl">helm repo add azure https://mirror.azure.cn/kubernetes/charts
+</span></span></code></pre></div><h4 id="213-kind-环境">2.1.3 Kind 环境</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span> <span class="k">$(</span>uname -m<span class="k">)</span> <span class="o">=</span> x86_64 <span class="o">]</span> <span class="o">&amp;&amp;</span> curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+</span></span><span class="line"><span class="cl">chmod +x ./kind
+</span></span><span class="line"><span class="cl">sudo mv ./kind /usr/local/bin/kind
+</span></span></code></pre></div><h4 id="214-docker-环境">2.1.4 Docker 环境</h4>
+<p>参考 <a href="../chapter2" rel="">Docker 安装</a></p>
+<h4 id="215-获取-byconity-deploy-源码">2.1.5 获取 byconity-deploy 源码</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone git@github.com:ByConity/byconity-deploy.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> byconity-deploy
+</span></span></code></pre></div><h3 id="22-kind-配置-k8s-集群">2.2 Kind 配置 K8S 集群</h3>
+<p>docker 拉取 node 镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker pull kindest/node:v1.27.3
+</span></span></code></pre></div><p>创建 1 个 control-plane 和 3 个 worker 的集群</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kind create cluster --config examples/kind/kind-byconity.yaml
+</span></span></code></pre></div><p>验证</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl cluster-info
+</span></span></code></pre></div><h3 id="23-初始化-demo">2.3 初始化 Demo</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Install with fdb CRD first</span>
+</span></span><span class="line"><span class="cl">helm upgrade --install --create-namespace --namespace byconity -f ./examples/kind/values-kind.yaml byconity ./chart/byconity --set fdb.enabled<span class="o">=</span><span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Install with fdb cluster</span>
+</span></span><span class="line"><span class="cl">helm upgrade --install --create-namespace --namespace byconity -f ./examples/kind/values-kind.yaml byconity ./chart/byconity
+</span></span></code></pre></div><p>等待所有 pods 准备完毕（使用如下命令查看状态）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl -n byconity get po
+</span></span></code></pre></div><p>进入容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl -n byconity <span class="nb">exec</span> -it sts/byconity-server -- bash
+</span></span></code></pre></div><p>进入 clickhouse 客户端</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">clickhouse client
+</span></span></code></pre></div><h3 id="24-从-kubernetes-集群中删除或停止-byconity">2.4 从 Kubernetes 集群中删除或停止 ByConity</h3>
+<p>删除集群</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">helm uninstall --namespace byconity byconity
+</span></span></code></pre></div><p>停止 ByConity</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker stop byconity-cluster-control-plane byconity-cluster-worker byconity-cluster-worker2 byconity-cluster-worker3
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/ops/chapter7/" data-title="Linux 环境下 ByConity 的安装与使用" data-hashtags="linux"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/ops/chapter7/" data-hashtag="linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/ops/chapter7/" data-title="Linux 环境下 ByConity 的安装与使用"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/ops/chapter7/" data-title="Linux 环境下 ByConity 的安装与使用"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/ops/chapter7/" data-title="Linux 环境下 ByConity 的安装与使用"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/other/chapter4/" class="prev" rel="prev" title="基于 OpenCore 引导的黑苹果安装"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>基于 OpenCore 引导的黑苹果安装</a>
+            <a href="/posts/ops/chapter8/" class="next" rel="next" title="Linux 环境下 SeaTunnel 的安装与使用">Linux 环境下 SeaTunnel 的安装与使用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

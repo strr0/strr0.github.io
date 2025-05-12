@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Linux 环境下 SeaTunnel 的安装与使用 - 我的全新 Hugo 网站</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Linux 环境下 SeaTunnel 的安装与使用" />
+<meta property="og:description" content="介绍 SeaTunnel 是一个非常易于使用，超高性能的分布式数据集成平台，支持实时性海量数据同步。在已部署 SeaTunnel 的环境下，只需一个作业配置即可根据配置执行作业。 1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/ops/chapter8/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-17T10:00:00+08:00" />
+<meta property="article:modified_time" content="2023-10-17T10:00:00+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Linux 环境下 SeaTunnel 的安装与使用"/>
+<meta name="twitter:description" content="介绍 SeaTunnel 是一个非常易于使用，超高性能的分布式数据集成平台，支持实时性海量数据同步。在已部署 SeaTunnel 的环境下，只需一个作业配置即可根据配置执行作业。 1"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/ops/chapter8/" /><link rel="prev" href="http://example.org/posts/ops/chapter7/" /><link rel="next" href="http://example.org/posts/ops/chapter9/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Linux 环境下 SeaTunnel 的安装与使用",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/ops\/chapter8\/"
+        },"genre": "posts","keywords": "linux","wordcount":  1037 ,
+        "url": "http:\/\/example.org\/posts\/ops\/chapter8\/","datePublished": "2023-10-17T10:00:00+08:00","dateModified": "2023-10-17T10:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "strr0"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux 环境下 SeaTunnel 的安装与使用</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-17">2023-10-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1037 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#介绍">介绍</a></li>
+        <li><a href="#1-seatunnel-部署">1 SeaTunnel 部署</a></li>
+        <li><a href="#2-运行作业">2 运行作业</a></li>
+        <li><a href="#3-验证">3 验证</a></li>
+        <li><a href="#4-seatunnel-web-部署">4 SeaTunnel-Web 部署</a></li>
+        <li><a href="#5-问题与修复">5 问题与修复</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="介绍">介绍</h3>
+<p>SeaTunnel 是一个非常易于使用，超高性能的分布式数据集成平台，支持实时性海量数据同步。在已部署 SeaTunnel 的环境下，只需一个作业配置即可根据配置执行作业。</p>
+<h3 id="1-seatunnel-部署">1 SeaTunnel 部署</h3>
+<h4 id="11-环境需求">1.1 环境需求</h4>
+<p>java 环境（java 8 或 java 11）</p>
+<h4 id="12-下载-seatunnel">1.2 下载 SeaTunnel</h4>
+<p>下载并解压</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget <span class="s2">&#34;https://archive.apache.org/dist/seatunnel/2.3.3/apache-seatunnel-2.3.3-bin.tar.gz&#34;</span>
+</span></span><span class="line"><span class="cl">tar -xzvf <span class="s2">&#34;apache-seatunnel-2.3.3-bin.tar.gz&#34;</span>
+</span></span></code></pre></div><h4 id="13-安装连接器插件">1.3 安装连接器插件</h4>
+<p>配置所需要的插件，如 jdbc 插件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># config/plugin_config</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--seatunnel-connectors--
+</span></span><span class="line"><span class="cl">connector-jdbc
+</span></span><span class="line"><span class="cl">--end--
+</span></span></code></pre></div><p>执行命令安装插件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sh bin/install-plugin.sh 2.3.3
+</span></span></code></pre></div><blockquote>
+<p>jdbc 所依赖的驱动程序需要复制到 $SEATNUNNEL_HOME/lib/ 目录下，才能保证作业正常运行</p>
+</blockquote>
+<h3 id="2-运行作业">2 运行作业</h3>
+<h4 id="21-环境依赖">2.1 环境依赖</h4>
+<ul>
+<li>已部署的SeaTunnel</li>
+</ul>
+<h4 id="22-作业配置demo">2.2 作业配置（Demo）</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># config/v2.batch.config.template</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">env <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  execution.parallelism <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  job.mode <span class="o">=</span> <span class="s2">&#34;BATCH&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  FakeSource <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">result_table_name</span> <span class="o">=</span> <span class="s2">&#34;fake&#34;</span>
+</span></span><span class="line"><span class="cl">    row.num <span class="o">=</span> <span class="m">16</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">schema</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      fields <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">name</span> <span class="o">=</span> <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">age</span> <span class="o">=</span> <span class="s2">&#34;int&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">transform <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  FieldMapper <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">source_table_name</span> <span class="o">=</span> <span class="s2">&#34;fake&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">result_table_name</span> <span class="o">=</span> <span class="s2">&#34;fake1&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">field_mapper</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">age</span> <span class="o">=</span> age
+</span></span><span class="line"><span class="cl">      <span class="nv">name</span> <span class="o">=</span> new_name
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sink <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  Console <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">source_table_name</span> <span class="o">=</span> <span class="s2">&#34;fake1&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h4 id="23-执行作业">2.3 执行作业</h4>
+<p>运行如下命令执行作业</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> apache-seatunnel-2.3.3
+</span></span><span class="line"><span class="cl">./bin/seatunnel.sh --config ./config/v2.batch.config.template -e <span class="nb">local</span>
+</span></span></code></pre></div><h3 id="3-验证">3 验证</h3>
+<h4 id="31-环境准备">3.1 环境准备</h4>
+<ul>
+<li>服务器配置 128 核 512g 内存</li>
+<li>Java 8</li>
+<li>SeaTunnel 2.3.3</li>
+<li>达梦数据库及测试数据</li>
+</ul>
+<h4 id="32-驱动配置">3.2 驱动配置</h4>
+<p>将达梦数据库驱动 DmJdbcDriver18.jar 复制到 $SEATNUNNEL_HOME/lib/ 目录下</p>
+<h4 id="33-作业配置">3.3 作业配置</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># config/v2.batch.config</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">env <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  execution.parallelism <span class="o">=</span> <span class="m">10</span>  <span class="c1"># 并行数</span>
+</span></span><span class="line"><span class="cl">  job.mode <span class="o">=</span> <span class="s2">&#34;BATCH&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  Jdbc <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">url</span> <span class="o">=</span> <span class="s2">&#34;jdbc:dm://localhost:5236/xxxx&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">driver</span> <span class="o">=</span> <span class="s2">&#34;dm.jdbc.driver.DmDriver&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">connection_check_timeout_sec</span> <span class="o">=</span> <span class="m">100</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">user</span> <span class="o">=</span> <span class="s2">&#34;xxxx&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">password</span> <span class="o">=</span> <span class="s2">&#34;********&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">query</span> <span class="o">=</span> <span class="s2">&#34;select * from xxxx.xxxx&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">fetch_size</span> <span class="o">=</span> <span class="m">10000</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># partition_column = &#34;PART_ID&#34;  # 分区字段</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">partition_num</span> <span class="o">=</span> <span class="m">40</span>  <span class="c1"># 分区数</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#transform {</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sink <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  jdbc <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">url</span> <span class="o">=</span> <span class="s2">&#34;jdbc:dm://localhost:5236/xxxx&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">driver</span> <span class="o">=</span> <span class="s2">&#34;dm.jdbc.driver.DmDriver&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">user</span> <span class="o">=</span> <span class="s2">&#34;xxxx&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">password</span> <span class="o">=</span> <span class="s2">&#34;********&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">query</span> <span class="o">=</span> <span class="s2">&#34;insert into xxxx.xxxx(xxxx,xxxx,xxxx) values(:xxxx,:xxxx,:xxxx)&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h4 id="34-执行作业">3.4 执行作业</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./bin/seatunnel.sh --config ./config/v2.batch.config -e <span class="nb">local</span>
+</span></span></code></pre></div><h4 id="35-运行结果">3.5 运行结果</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据量</th>
+<th style="text-align:center">并行数</th>
+<th style="text-align:center">分区数</th>
+<th style="text-align:center">设置分区字段</th>
+<th style="text-align:center">耗时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">800w</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">11分钟</td>
+</tr>
+<tr>
+<td style="text-align:center">800w</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">11分钟</td>
+</tr>
+<tr>
+<td style="text-align:center">800w</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">11分钟</td>
+</tr>
+<tr>
+<td style="text-align:center">800w</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">11分钟</td>
+</tr>
+<tr>
+<td style="text-align:center">800w</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">11分钟</td>
+</tr>
+<tr>
+<td style="text-align:center">800w</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">10分钟</td>
+</tr>
+<tr>
+<td style="text-align:center">800w</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">18分钟</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-seatunnel-web-部署">4 SeaTunnel-Web 部署</h3>
+<h4 id="41-环境要求">4.1 环境要求</h4>
+<ul>
+<li>已部署 SeaTunnel</li>
+<li>MySQL</li>
+</ul>
+<h4 id="42-下载与安装">4.2 下载与安装</h4>
+<p>从 <a href="https://seatunnel.apache.org/download" target="_blank" rel="noopener noreffer ">https://seatunnel.apache.org/download</a> 下载 seatunnel web，并解压</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar -zxvf apache-seatunnel-web-1.0.0-SNAPSHOT.tar.gz
+</span></span></code></pre></div><h4 id="43-初始化数据库mysql">4.3 初始化数据库（MySQL）</h4>
+<p>修改 seatunnel_server_env.sh 配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># script/seatunnel_server_env.sh</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">HOSTNAME</span><span class="o">=</span><span class="s2">&#34;localhost&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PORT</span><span class="o">=</span><span class="s2">&#34;3306&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">USERNAME</span><span class="o">=</span><span class="s2">&#34;root&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PASSWORD</span><span class="o">=</span><span class="s2">&#34;123456&#34;</span>
+</span></span></code></pre></div><p>运行命令初始化</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sh script/init_sql.sh
+</span></span></code></pre></div><h4 id="44-配置修改">4.4 配置修改</h4>
+<p>修改 application.yml 数据库连接配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># conf/application.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">datasource</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver-class-name</span><span class="p">:</span><span class="w"> </span><span class="l">com.mysql.jdbc.Driver</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://localhost:3306/seatunnel?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true&amp;allowPublicKeyRetrieval=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">password </span><span class="w"> </span><span class="c"># 根据实际情况修改</span><span class="w">
+</span></span></span></code></pre></div><p>复制 hazelcast-client.yaml 到 conf/</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp <span class="nv">$SEATUNNEL_HOME</span>/config/hazelcast-client.yaml conf/
+</span></span></code></pre></div><p>复制 plugin-mapping.properties 到 conf/</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp <span class="nv">$SEATUNNEL_HOME</span>/connectors/plugin-mapping.properties conf/
+</span></span></code></pre></div><p>启动 SeaTunnel-Web</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sh bin/seatunnel-backend-daemon.sh start
+</span></span></code></pre></div><p>访问 <a href="http://127.0.0.1:8801/ui/" target="_blank" rel="noopener noreffer ">http://127.0.0.1:8801/ui/</a> 即可进入 web 端（admin/admin）</p>
+<h3 id="5-问题与修复">5 问题与修复</h3>
+<h4 id="51-空指针问题">5.1 空指针问题</h4>
+<p>checkpoint 超时导致，可增大 timeout 解决</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># config/seatunnel.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">seatunnel</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">engine</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">checkpoint</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="m">100000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="m">6000000</span><span class="w">
+</span></span></span></code></pre></div><h4 id="52-数据重复问题">5.2 数据重复问题</h4>
+<p>未配置 checkpoint 导致，checkpoint 用于记录数据中间状态，确保数据不会丢失和重复</p>
+<h4 id="53-作业配置问题">5.3 作业配置问题</h4>
+<p>① source 参数和 sink 参数完全一致的情况下可以不使用 transform，sink 中的 insert 语句可以直接使用 ? 占位符</p>
+<p>② 使用 transform 导致 ? 占位符匹配参数错位，可以使用 :param（参数名称）来指定参数</p>
+<p>③ 作业 sink 参数个数必须与 source 参数个数一致，否者作业会执行失败，可用 transform 过滤</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">transform <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  FieldMapper <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">source_table_name</span> <span class="o">=</span> <span class="s2">&#34;fake&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">result_table_name</span> <span class="o">=</span> <span class="s2">&#34;fake1&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">field_mapper</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">id</span> <span class="o">=</span> id
+</span></span><span class="line"><span class="cl">        <span class="nv">card</span> <span class="o">=</span> card
+</span></span><span class="line"><span class="cl">        <span class="nv">name</span> <span class="o">=</span> new_name
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h4 id="54-javanetbindexception-地址已在使用-bind-failed">5.4 java.net.BindException: 地址已在使用 (Bind failed)</h4>
+<p>查看端口是否占用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">netstat -alnp <span class="p">|</span> grep <span class="m">8801</span>
+</span></span></code></pre></div><p>如果端口被占用，执行命令杀死</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">kill</span> -9 103436（进程号）
+</span></span></code></pre></div><h4 id="55-web-端-404-问题">5.5 Web 端 404 问题</h4>
+<p>查看运行日志，可以看到 user does not exists</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tail -f nohup.out
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...user does not exists
+</span></span></code></pre></div><p>尝试通过 nginx 跳转进入</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># nginx.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#...</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># SeaTunnel-Web</span>
+</span></span><span class="line"><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    listen 8808<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    server_name localhost<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        proxy_pass http://127.0.0.1:8801<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    location /ui <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        root /linewell/seatunnel/apache-seatunnel-web-1.0.0-SNAPSHOT<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        index index.html index.htm<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>重启 nginx</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/usr/local/nginx/sbin/nginx -s reload -c /usr/local/nginx/conf/nginx.conf
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/ops/chapter8/" data-title="Linux 环境下 SeaTunnel 的安装与使用" data-hashtags="linux"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/ops/chapter8/" data-hashtag="linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/ops/chapter8/" data-title="Linux 环境下 SeaTunnel 的安装与使用"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/ops/chapter8/" data-title="Linux 环境下 SeaTunnel 的安装与使用"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/ops/chapter8/" data-title="Linux 环境下 SeaTunnel 的安装与使用"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/ops/chapter7/" class="prev" rel="prev" title="Linux 环境下 ByConity 的安装与使用"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Linux 环境下 ByConity 的安装与使用</a>
+            <a href="/posts/ops/chapter9/" class="next" rel="next" title="Ruoyi-Vue-Plus 框架">Ruoyi-Vue-Plus 框架<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,89 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>我的全新 Hugo 网站</title>
+        <link>http://example.org/</link>
+        <description>This is my cool site</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 09 Feb 2025 14:00:00 &#43;0800</lastBuildDate>
+            <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>一加 6T 刷入 Windows 及 Linux 等系统</title>
+    <link>http://example.org/posts/other/chapter12/</link>
+    <pubDate>Sun, 09 Feb 2025 14:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/other/chapter12/</guid>
+    <description><![CDATA[介绍 刷机指南 1 前置准备 1.1 驱动安装 一加手机可以从 daxiaamu 下载驱动 adb 与 fastboot 找不到设备问题：1. 驱动未安装；2. 手动从 此电脑 &gt; 管理 &gt; 设备管理器 选择未识别的]]></description>
+</item>
+<item>
+    <title>远程桌面协议 XRDP</title>
+    <link>http://example.org/posts/other/chapter11/</link>
+    <pubDate>Sun, 05 Jan 2025 20:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/other/chapter11/</guid>
+    <description><![CDATA[介绍 xrdp 使用 Microsoft 远程桌面协议（RDP）为远程计算机提供图形登录 1 安装 安装依赖 yum install finger cmake patch gcc make autoconf libtool automake pkgconfig openssl-devel gettext file \ pam-devel libX11-devel libXfixes-devel libjpeg-devel libXrandr-devel nasm \ flex bison gcc-c++ libxslt perl-libxml-perl xorg-x11-font-utils xmlto-tex 下载源码 wget]]></description>
+</item>
+<item>
+    <title>Linux 环境下 MySQL 的安装与使用</title>
+    <link>http://example.org/posts/ops/chapter18/</link>
+    <pubDate>Sat, 04 Jan 2025 15:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter18/</guid>
+    <description><![CDATA[介绍 关系型数据库 1 安装 1.1 通过二进制包安装 安装依赖 yum install libaio numactl 获取通用二进制包 wget https://downloads.mysql.com/archives/get/p/23/file/mysql-8.0.33-linux-glibc2.28-x86_64.tar.gz 创建 MySQL 组 groupadd -g 27 -o -r mysql 创建 MySQL 用户 useradd -M -N -g mysql -o -r -d /usr/local/mysql/data -s /bin/false -c &#34;MySQL Server&#34; -u 27 mysql]]></description>
+</item>
+<item>
+    <title>数据库版本管理工具 Liquibase</title>
+    <link>http://example.org/posts/ops/chapter17/</link>
+    <pubDate>Tue, 31 Dec 2024 11:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter17/</guid>
+    <description><![CDATA[介绍 Liquibase 自动化、安全且合规的数据库变更管理管道，可加速交付并减少工作量。 1 配置 1.1 依赖说明 插件 版本 liquibase-maven-plugin 4.26.0 1.2 项目配置 依赖配置 &lt;!-- 需要用到的驱动需要添加]]></description>
+</item>
+<item>
+    <title>基于 Mybatis Plus 插件实现字段填充</title>
+    <link>http://example.org/posts/dev/chapter17/</link>
+    <pubDate>Sun, 29 Dec 2024 23:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter17/</guid>
+    <description><![CDATA[介绍 在实际开发过程中可能会频繁修改表中的某些基础字段数据（如更新人、更新时间等），通过 Mybatis Plus 插件可以统一对其进行处理，减少冗余代码 1 基础配置 1.1]]></description>
+</item>
+<item>
+    <title>Hexo 博客搭建</title>
+    <link>http://example.org/posts/other/chapter10/</link>
+    <pubDate>Tue, 24 Dec 2024 12:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/other/chapter10/</guid>
+    <description><![CDATA[介绍 快速、简洁且高效的博客框架 1 环境配置 1.1 Nodejs 环境 参考 Nodejs 环境搭建 1.2 安装 Hexo npm install hexo-cli -g 2 博客搭建 2.1 初始化 创建博客目录 hexo init &lt;folder&gt; 进入博客目录 cd &lt;folder&gt; 下载依赖 npm]]></description>
+</item>
+<item>
+    <title>Nodejs 版本管理工具 Volta</title>
+    <link>http://example.org/posts/ops/chapter16/</link>
+    <pubDate>Mon, 23 Dec 2024 21:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter16/</guid>
+    <description><![CDATA[介绍 Volta 是一种管理 JavaScript 命令行工具的方式，无缝的按项目版本切换，无需在每次 Node 升级时重新安装 1 安装 1.1 Unix 安装 使用如下命令安装 curl https://get.volta.sh | bash 修改环境变量 # /etc/profile VOLTA_HOME=$HOME/.volta]]></description>
+</item>
+<item>
+    <title>Hugo 博客搭建</title>
+    <link>http://example.org/posts/other/chapter9/</link>
+    <pubDate>Sun, 22 Dec 2024 20:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/other/chapter9/</guid>
+    <description><![CDATA[介绍 世界上最快的网站构建框架 1 环境配置 1.1 根据操作系统和架构下载对应的二进制包 1.2 解压压缩包 1.3 移动可执行文件到合适的路径 1.4 添加该路径到环境变量 PATH]]></description>
+</item>
+<item>
+    <title>Spring 整合 OAuth2</title>
+    <link>http://example.org/posts/dev/chapter16/</link>
+    <pubDate>Sat, 21 Dec 2024 23:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/dev/chapter16/</guid>
+    <description><![CDATA[介绍 OAuth 协议为用户资源的授权提供了一个安全的、开放而又简易的标准。OAuth 的授权可以使第三方不触及到用户的账号信息（如用户名与密码），即第三]]></description>
+</item>
+<item>
+    <title>Linux 环境下 Docker 的安装与使用</title>
+    <link>http://example.org/posts/ops/chapter1/</link>
+    <pubDate>Sun, 24 Nov 2024 10:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter1/</guid>
+    <description><![CDATA[介绍 Docker Engine 是一种开源容器化技术，用于构建和容器化应用程序。 1 环境要求 64 位系统 内核版本 3.10 及以上 iptables 版本 1.4 及以上 git 版本 1.7 及以上 ps 命令（procps 或]]></description>
+</item>
+</channel>
+</rss>

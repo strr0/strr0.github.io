@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>GitLab CI/CD 自动化部署 - 我的全新 Hugo 网站</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="GitLab CI/CD 自动化部署" />
+<meta property="og:description" content="介绍 GitLab CI/CD 是 GitLab 提供持续集成服务，主要功能通过一个执行器和作业配置实现，执行器一般不部署在 Gitlab 服务器下，推荐部署到开发环境服务器。将 .gitlab-ci.yml 文件添加到存" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/ops/chapter10/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-25T10:00:00+08:00" />
+<meta property="article:modified_time" content="2023-10-25T10:00:00+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="GitLab CI/CD 自动化部署"/>
+<meta name="twitter:description" content="介绍 GitLab CI/CD 是 GitLab 提供持续集成服务，主要功能通过一个执行器和作业配置实现，执行器一般不部署在 Gitlab 服务器下，推荐部署到开发环境服务器。将 .gitlab-ci.yml 文件添加到存"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/ops/chapter10/" /><link rel="prev" href="http://example.org/posts/ops/chapter9/" /><link rel="next" href="http://example.org/posts/dev/chapter7/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "GitLab CI/CD 自动化部署",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/ops\/chapter10\/"
+        },"genre": "posts","keywords": "linux","wordcount":  942 ,
+        "url": "http:\/\/example.org\/posts\/ops\/chapter10\/","datePublished": "2023-10-25T10:00:00+08:00","dateModified": "2023-10-25T10:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "strr0"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">GitLab CI/CD 自动化部署</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-25">2023-10-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;942 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#1-gitlab-runner-部署">1 Gitlab Runner 部署</a>
+      <ul>
+        <li><a href="#11-环境需要">1.1 环境需要</a></li>
+        <li><a href="#12-安装-runner">1.2 安装 Runner</a></li>
+        <li><a href="#13-注册-runner">1.3 注册 Runner</a></li>
+        <li><a href="#14-移除-runner">1.4 移除 Runner</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-gitlab-cicd-配置">2 GitLab CI/CD 配置</a>
+      <ul>
+        <li><a href="#21-环境变量设置">2.1 环境变量设置</a></li>
+        <li><a href="#22-作业配置">2.2 作业配置</a></li>
+        <li><a href="#23-自动化部署">2.3 自动化部署</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-问题与修复">3 问题与修复</a>
+      <ul>
+        <li><a href="#31-mvn-未找到命令">3.1 mvn: 未找到命令</a></li>
+        <li><a href="#32-docker-权限问题">3.2 docker 权限问题</a></li>
+        <li><a href="#33-413-request-entity-too-large">3.3 413 Request Entity Too Large</a></li>
+        <li><a href="#34-artifacts-问题">3.4 artifacts 问题</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="介绍">介绍</h2>
+<p>GitLab CI/CD 是 GitLab 提供持续集成服务，主要功能通过一个执行器和作业配置实现，执行器一般不部署在 Gitlab 服务器下，推荐部署到开发环境服务器。将 .gitlab-ci.yml 文件添加到存储库的根目录，并 GitLab 项目配置为使用执行器，然后每次提交或推送，触发 CI 管道，执行自动化部署。</p>
+<h2 id="1-gitlab-runner-部署">1 Gitlab Runner 部署</h2>
+<h3 id="11-环境需要">1.1 环境需要</h3>
+<ul>
+<li>Docker 环境（docker 类型 runner 需要）</li>
+</ul>
+<h3 id="12-安装-runner">1.2 安装 Runner</h3>
+<h4 id="121-添加官方源">1.2.1 添加官方源</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -L <span class="s2">&#34;https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh&#34;</span> <span class="p">|</span> sudo bash
+</span></span></code></pre></div><h4 id="122-安装最新版本">1.2.2 安装最新版本</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install gitlab-runner
+</span></span></code></pre></div><h4 id="123-安装指定版本">1.2.3 安装指定版本</h4>
+<p>通过 /api/v4/version 查看 Gitlab 版本</p>
+<p>查看可用 runner 版本</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum list gitlab-runner --showduplicates <span class="p">|</span> sort -r
+</span></span></code></pre></div><p>安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install gitlab-runner-15.11.0-1
+</span></span></code></pre></div><h3 id="13-注册-runner">1.3 注册 Runner</h3>
+<h4 id="131-交互模式">1.3.1 交互模式</h4>
+<p>运行命令注册</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gitlab-runner register
+</span></span></code></pre></div><p>如需代理，运行如下命令注册</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">HTTP_PROXY</span><span class="o">=</span>http://yourproxyurl:3128
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">HTTPS_PROXY</span><span class="o">=</span>http://yourproxyurl:3128
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo -E gitlab-runner register
+</span></span></code></pre></div><p>输入 Gitlab URL，如 <a href="https://gitlab.com" target="_blank" rel="noopener noreffer ">https://gitlab.com</a></p>
+<p>输入验证 token</p>
+<p>输入 Runner 名称</p>
+<p>输入执行器类型，如 docker</p>
+<h4 id="132-非交互模式">1.3.2 非交互模式</h4>
+<p>Shell 类型执行器（推荐）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gitlab-runner register <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --non-interactive <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --url <span class="s2">&#34;https://gitlab.com/&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --registration-token <span class="s2">&#34;</span><span class="nv">$PROJECT_REGISTRATION_TOKEN</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --executor <span class="s2">&#34;shell&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --shell <span class="s2">&#34;bash&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --description <span class="s2">&#34;shell-executor-runner&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --tag-list <span class="s2">&#34;shell&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --run-untagged<span class="o">=</span><span class="s2">&#34;true&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --locked<span class="o">=</span><span class="s2">&#34;false&#34;</span>
+</span></span></code></pre></div><p>Docker 类型执行器（GitLab 15.10 及以上）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gitlab-runner register <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --non-interactive <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --url <span class="s2">&#34;https://gitlab.com/&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --token <span class="s2">&#34;</span><span class="nv">$RUNNER_TOKEN</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --executor <span class="s2">&#34;docker&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --docker-image alpine:latest <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --description <span class="s2">&#34;docker-runner&#34;</span>
+</span></span></code></pre></div><p>Docker 类型执行器（GitLab 15.10 以下）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gitlab-runner register <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --non-interactive <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --url <span class="s2">&#34;https://gitlab.com/&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --registration-token <span class="s2">&#34;</span><span class="nv">$PROJECT_REGISTRATION_TOKEN</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --executor <span class="s2">&#34;docker&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --docker-image alpine:latest <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --description <span class="s2">&#34;docker-runner&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --tag-list <span class="s2">&#34;docker,aws&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --run-untagged<span class="o">=</span><span class="s2">&#34;true&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --locked<span class="o">=</span><span class="s2">&#34;false&#34;</span>
+</span></span></code></pre></div><p>注册成功后可在 Gitlab 项目的 Runner 页面看到可用的 runner</p>
+<blockquote>
+<p>使用 docker 类型执行器，执行结果保存在 docker 容器内部，不可直接部署，需要上传到容器外部部署，一般只需要结果的情况下可以使用 docker 类型执行器。token 可以在 Project -&gt; Settings -&gt; CI / CD -&gt; Runner 中找到</p>
+</blockquote>
+<h3 id="14-移除-runner">1.4 移除 Runner</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gitlab-runner unregister --name shell-executor-runner
+</span></span></code></pre></div><h2 id="2-gitlab-cicd-配置">2 GitLab CI/CD 配置</h2>
+<h3 id="21-环境变量设置">2.1 环境变量设置</h3>
+<p>在 Settings -&gt; CI /CD 页设置所需要的环境变量，如 APP_NAME（项目名称），APP_PORT（端口号），IMAGE_NAME（镜像名称），IMAGE_VERSION（镜像版本）</p>
+<h3 id="22-作业配置">2.2 作业配置</h3>
+<p>在项目根目录创建 .gitlab-ci.yml</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">MAVEN_CLI_OPTS</span><span class="p">:</span><span class="w"> </span><span class="p">&gt;-</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">    -DskipTests</span><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build-job</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">mvn $MAVEN_CLI_OPTS package</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">      if docker ps -a | grep -q &#34;$APP_NAME&#34;; then
+</span></span></span><span class="line"><span class="cl"><span class="sd">        docker stop &#34;$APP_NAME&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">        docker rm &#34;$APP_NAME&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">      fi</span><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">      if docker images | grep -q &#34;$IMAGE_NAME&#34;; then
+</span></span></span><span class="line"><span class="cl"><span class="sd">        docker rmi &#34;$IMAGE_NAME:$IMAGE_VERSION&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">      fi</span><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">docker build -t &#34;$IMAGE_NAME:$IMAGE_VERSION&#34; ruoyi-admin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">only</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">refs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">except</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">changes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">xxx/*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">deploy-job</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">docker run -d --name &#34;$APP_NAME&#34; -p &#34;$APP_PORT:8080&#34; &#34;$IMAGE_NAME:$IMAGE_VERSION&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">only</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">refs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">except</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">changes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">xxx/*</span><span class="w">
+</span></span></span></code></pre></div><h3 id="23-自动化部署">2.3 自动化部署</h3>
+<p>当代码被 push 到 gitlab 时触发部署，可在 CI / CD 页看到执行结果</p>
+<h2 id="3-问题与修复">3 问题与修复</h2>
+<h3 id="31-mvn-未找到命令">3.1 mvn: 未找到命令</h3>
+<p>mvn 路径权限问题，可以修改 mvn 权限为所有人可读</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod -R <span class="m">755</span> <span class="nv">$M2_HOME</span>
+</span></span></code></pre></div><h3 id="32-docker-权限问题">3.2 docker 权限问题</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo gpasswd -a gitlab-runner docker
+</span></span><span class="line"><span class="cl">newgrp docker
+</span></span></code></pre></div><h3 id="33-413-request-entity-too-large">3.3 413 Request Entity Too Large</h3>
+<p>当构建作业失败并出现以下错误时，增加<a href="https://docs.gitlab.com/ee/administration/settings/continuous_integration.html#maximum-artifacts-size" target="_blank" rel="noopener noreffer ">最大产物大小</a></p>
+<pre tabindex="0"><code>Uploading artifacts as &#34;archive&#34; to coordinator... too large archive ...
+</code></pre><h3 id="34-artifacts-问题">3.4 artifacts 问题</h3>
+<p>在流水线执行每一个作业的时候会默认将上一个作业的产物清空，配置 artifacts 可以临时保存作业产物，以供下一个作业使用</p>
+<blockquote>
+<p>artifacts 问题的另一个解决思路是尽量不跨作业使用产物，后续作业如需使用上一个作业的产物时可以选择将两个作业合并，如 mvn 打包项目和 docker 打包镜像整合为一个作业</p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/ops/chapter10/" data-title="GitLab CI/CD 自动化部署" data-hashtags="linux"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/ops/chapter10/" data-hashtag="linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/ops/chapter10/" data-title="GitLab CI/CD 自动化部署"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/ops/chapter10/" data-title="GitLab CI/CD 自动化部署"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/ops/chapter10/" data-title="GitLab CI/CD 自动化部署"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/ops/chapter9/" class="prev" rel="prev" title="Ruoyi-Vue-Plus 框架"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Ruoyi-Vue-Plus 框架</a>
+            <a href="/posts/dev/chapter7/" class="next" rel="next" title="Spring 事件驱动">Spring 事件驱动<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

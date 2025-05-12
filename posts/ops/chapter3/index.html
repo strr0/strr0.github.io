@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Linux 环境下 Kafka 的安装与使用 - 我的全新 Hugo 网站</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Linux 环境下 Kafka 的安装与使用" />
+<meta property="og:description" content="介绍 消息队列 1 安装 1.1 通过源码安装 1.1.1 Java 环境 参考 Java 环境搭建 1.1.2 Zookeeper 环境 下载 zookeeper 安装 zookeeper tar -xzvf apache-zookeeper-3.8.1-bin.tar.gz -C /opt/software cd /opt/software/apache-zookeeper-3.8.1-bin/conf cp zoo_sample.cfg zoo.cfg zk 基本配置 # /opt/software/apache-zookeeper-3.8.1-bin/conf/zoo.cfg ## zk 数据配置（可选） dataDir=/opt/data/zookeeper zk 启动与停" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/ops/chapter3/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-25T15:00:00+08:00" />
+<meta property="article:modified_time" content="2023-04-25T15:00:00+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Linux 环境下 Kafka 的安装与使用"/>
+<meta name="twitter:description" content="介绍 消息队列 1 安装 1.1 通过源码安装 1.1.1 Java 环境 参考 Java 环境搭建 1.1.2 Zookeeper 环境 下载 zookeeper 安装 zookeeper tar -xzvf apache-zookeeper-3.8.1-bin.tar.gz -C /opt/software cd /opt/software/apache-zookeeper-3.8.1-bin/conf cp zoo_sample.cfg zoo.cfg zk 基本配置 # /opt/software/apache-zookeeper-3.8.1-bin/conf/zoo.cfg ## zk 数据配置（可选） dataDir=/opt/data/zookeeper zk 启动与停"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/ops/chapter3/" /><link rel="prev" href="http://example.org/posts/ops/chapter2/" /><link rel="next" href="http://example.org/posts/ops/chapter4/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Linux 环境下 Kafka 的安装与使用",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/ops\/chapter3\/"
+        },"genre": "posts","keywords": "linux","wordcount":  323 ,
+        "url": "http:\/\/example.org\/posts\/ops\/chapter3\/","datePublished": "2023-04-25T15:00:00+08:00","dateModified": "2023-04-25T15:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "strr0"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux 环境下 Kafka 的安装与使用</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-04-25">2023-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;323 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#1-安装">1 安装</a>
+      <ul>
+        <li><a href="#11-通过源码安装">1.1 通过源码安装</a></li>
+        <li><a href="#12-通过-docker-安装">1.2 通过 Docker 安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-使用">2 使用</a>
+      <ul>
+        <li><a href="#21-基础操作">2.1 基础操作</a></li>
+        <li><a href="#22-spring-整合">2.2 Spring 整合</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="介绍">介绍</h2>
+<p>消息队列</p>
+<h2 id="1-安装">1 安装</h2>
+<h3 id="11-通过源码安装">1.1 通过源码安装</h3>
+<h4 id="111-java-环境">1.1.1 Java 环境</h4>
+<p>参考 <a href="/posts/ops/chapter12/#1-java-%e7%8e%af%e5%a2%83" rel="">Java 环境搭建</a></p>
+<h4 id="112-zookeeper-环境">1.1.2 Zookeeper 环境</h4>
+<p>下载 <a href="https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.8.1/apache-zookeeper-3.8.1-bin.tar.gz" target="_blank" rel="noopener noreffer ">zookeeper</a><br>
+安装 zookeeper</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar -xzvf apache-zookeeper-3.8.1-bin.tar.gz -C /opt/software
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /opt/software/apache-zookeeper-3.8.1-bin/conf
+</span></span><span class="line"><span class="cl">cp zoo_sample.cfg zoo.cfg
+</span></span></code></pre></div><p>zk 基本配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># /opt/software/apache-zookeeper-3.8.1-bin/conf/zoo.cfg</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## zk 数据配置（可选）</span>
+</span></span><span class="line"><span class="cl"><span class="nv">dataDir</span><span class="o">=</span>/opt/data/zookeeper
+</span></span></code></pre></div><p>zk 启动与停止</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /opt/software/apache-zookeeper-3.8.1-bin
+</span></span><span class="line"><span class="cl">bin/zkServer.sh start
+</span></span><span class="line"><span class="cl">bin/zkServer.sh stop
+</span></span></code></pre></div><h4 id="113-安装">1.1.3 安装</h4>
+<p>下载 <a href="https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/3.4.0/kafka_2.12-3.4.0.tgz" target="_blank" rel="noopener noreffer ">kafka</a><br>
+安装 kafka</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar -xzvf kafka_2.12-3.4.0.tgz -C /opt/software
+</span></span></code></pre></div><p>kafka 基本配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># /opt/software/kafka_2.12-3.4.0/config/server.properties</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## kafka 日志路径配置（可选）</span>
+</span></span><span class="line"><span class="cl">log.dirs<span class="o">=</span>/opt/data/kafka
+</span></span><span class="line"><span class="cl"><span class="c1">## 对外地址配置</span>
+</span></span><span class="line"><span class="cl">advertised.listeners<span class="o">=</span>PLAINTEXT://<span class="o">{</span>ip<span class="o">}</span>:9092
+</span></span></code></pre></div><p>kafka 启动与停止</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /opt/software/kafka_2.12-3.4.0
+</span></span><span class="line"><span class="cl">bin/kafka-server-start.sh config/server.properties
+</span></span><span class="line"><span class="cl">bin/kafka-server-stop.sh
+</span></span></code></pre></div><h3 id="12-通过-docker-安装">1.2 通过 Docker 安装</h3>
+<h4 id="121-拉取镜像">1.2.1 拉取镜像</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker pull bitnami/zookeeper
+</span></span><span class="line"><span class="cl">docker pull bitnami/kafka
+</span></span></code></pre></div><h4 id="122-运行容器">1.2.2 运行容器</h4>
+<p>创建网络</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker network create dev --driver bridge
+</span></span></code></pre></div><p>运行 zookeeper 容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d --name zookeeper-server <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -p 2181:2181 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="nv">ALLOW_ANONYMOUS_LOGIN</span><span class="o">=</span>yes <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --network dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    bitnami/zookeeper:latest
+</span></span></code></pre></div><p>运行 kafka 容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d --name kafka-server <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -p 9092:9092 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="nv">KAFKA_BROKER_ID</span><span class="o">=</span><span class="m">1</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="nv">KAFKA_CFG_LISTENERS</span><span class="o">=</span>PLAINTEXT://:9092 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="nv">KAFKA_CFG_ADVERTISED_LISTENERS</span><span class="o">=</span>PLAINTEXT://<span class="o">{</span>ip<span class="o">}</span>:9092 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="nv">KAFKA_CFG_ZOOKEEPER_CONNECT</span><span class="o">=</span>zookeeper-server:2181 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="nv">ALLOW_PLAINTEXT_LISTENER</span><span class="o">=</span>yes <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --network dev <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    bitnami/kafka:latest
+</span></span></code></pre></div><h2 id="2-使用">2 使用</h2>
+<h3 id="21-基础操作">2.1 基础操作</h3>
+<p>查看所有 topic</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /opt/software/kafka_2.12-3.4.0
+</span></span><span class="line"><span class="cl">bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+</span></span></code></pre></div><p>创建 topic</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /opt/software/kafka_2.12-3.4.0
+</span></span><span class="line"><span class="cl">bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic my_topic_name <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --partitions <span class="m">20</span> --replication-factor <span class="m">3</span> --config <span class="nv">x</span><span class="o">=</span>y
+</span></span></code></pre></div><p>修改 topic</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bin/kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic my_topic_name <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --partitions <span class="m">40</span>
+</span></span></code></pre></div><p>删除 topic</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic my_topic_name
+</span></span></code></pre></div><p>生产者</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; This is my first event
+</span></span><span class="line"><span class="cl">&gt; This is my second event
+</span></span></code></pre></div><p>消费者</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">This is my first event
+</span></span><span class="line"><span class="cl">This is my second event
+</span></span></code></pre></div><h3 id="22-spring-整合">2.2 Spring 整合</h3>
+<p>参考 <a href="/posts/dev/chapter4" rel="">Spring 整合 Kafka</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-04-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/ops/chapter3/" data-title="Linux 环境下 Kafka 的安装与使用" data-hashtags="linux"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/ops/chapter3/" data-hashtag="linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/ops/chapter3/" data-title="Linux 环境下 Kafka 的安装与使用"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/ops/chapter3/" data-title="Linux 环境下 Kafka 的安装与使用"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/ops/chapter3/" data-title="Linux 环境下 Kafka 的安装与使用"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/ops/chapter2/" class="prev" rel="prev" title="Linux 环境下 Redis 的安装与使用"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Linux 环境下 Redis 的安装与使用</a>
+            <a href="/posts/ops/chapter4/" class="next" rel="next" title="Linux 环境下 RabbitMQ 的安装与使用">Linux 环境下 RabbitMQ 的安装与使用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

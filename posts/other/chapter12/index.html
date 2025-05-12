@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>一加 6T 刷入 Windows 及 Linux 等系统 - 我的全新 Hugo 网站</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="一加 6T 刷入 Windows 及 Linux 等系统" />
+<meta property="og:description" content="介绍 刷机指南 1 前置准备 1.1 驱动安装 一加手机可以从 daxiaamu 下载驱动 adb 与 fastboot 找不到设备问题：1. 驱动未安装；2. 手动从 此电脑 &gt; 管理 &gt; 设备管理器 选择未识别的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/other/chapter12/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-02-09T14:00:00+08:00" />
+<meta property="article:modified_time" content="2025-02-09T14:00:00+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="一加 6T 刷入 Windows 及 Linux 等系统"/>
+<meta name="twitter:description" content="介绍 刷机指南 1 前置准备 1.1 驱动安装 一加手机可以从 daxiaamu 下载驱动 adb 与 fastboot 找不到设备问题：1. 驱动未安装；2. 手动从 此电脑 &gt; 管理 &gt; 设备管理器 选择未识别的"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/other/chapter12/" /><link rel="prev" href="http://example.org/posts/other/chapter11/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "一加 6T 刷入 Windows 及 Linux 等系统",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/other\/chapter12\/"
+        },"genre": "posts","keywords": "linux","wordcount":  1801 ,
+        "url": "http:\/\/example.org\/posts\/other\/chapter12\/","datePublished": "2025-02-09T14:00:00+08:00","dateModified": "2025-02-09T14:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "strr0"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">一加 6T 刷入 Windows 及 Linux 等系统</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-category">included in <a href="/categories/other/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>其他</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-02-09">2025-02-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1801 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#1-前置准备">1 前置准备</a>
+      <ul>
+        <li><a href="#11-驱动安装">1.1 驱动安装</a></li>
+        <li><a href="#12-开启-usb-调试">1.2 开启 USB 调试</a></li>
+        <li><a href="#13-解除-bl-锁">1.3 解除 BL 锁</a></li>
+        <li><a href="#14-刷入-twrp">1.4 刷入 TWRP</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-刷入-windows">2 刷入 Windows</a>
+      <ul>
+        <li><a href="#21-设备支持情况">2.1 设备支持情况</a></li>
+        <li><a href="#22-下载所需文件">2.2 下载所需文件</a></li>
+        <li><a href="#23-备份">2.3 备份</a></li>
+        <li><a href="#24-分区操作">2.4 分区操作</a></li>
+        <li><a href="#25-安装">2.5 安装</a></li>
+        <li><a href="#26-启动">2.6 启动</a></li>
+        <li><a href="#27-修复">2.7 修复</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-刷入-postmarketos">3 刷入 PostmarketOS</a>
+      <ul>
+        <li><a href="#31-下载所需文件">3.1 下载所需文件</a></li>
+        <li><a href="#32-分区操作">3.2 分区操作</a></li>
+        <li><a href="#33-刷入镜像">3.3 刷入镜像</a></li>
+        <li><a href="#34-android-与-postmarketos-切换">3.4 Android 与 PostmarketOS 切换</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-刷入-mobian">4 刷入 Mobian</a>
+      <ul>
+        <li><a href="#41-下载所需文件">4.1 下载所需文件</a></li>
+        <li><a href="#42-分区操作">4.2 分区操作</a></li>
+        <li><a href="#43-刷入镜像">4.3 刷入镜像</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-刷入-pixelexperience">5 刷入 PixelExperience</a>
+      <ul>
+        <li><a href="#51-前置准备">5.1 前置准备</a></li>
+        <li><a href="#52-刷入镜像">5.2 刷入镜像</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="介绍">介绍</h2>
+<p>刷机指南</p>
+<h2 id="1-前置准备">1 前置准备</h2>
+<h3 id="11-驱动安装">1.1 驱动安装</h3>
+<p>一加手机可以从 <a href="https://yun.daxiaamu.com/files/" target="_blank" rel="noopener noreffer ">daxiaamu</a> 下载驱动</p>
+<blockquote>
+<p>adb 与 fastboot 找不到设备问题：1. 驱动未安装；2. 手动从 <code>此电脑</code> &gt; <code>管理</code> &gt; <code>设备管理器</code> 选择未识别的设备右键 <code>更新驱动程序软件</code></p>
+</blockquote>
+<h3 id="12-开启-usb-调试">1.2 开启 USB 调试</h3>
+<p>多次点击 <code>关于手机</code> &gt; <code>版本号</code> 开启开发者模式</p>
+<p>开启 <code>系统</code> &gt; <code>开发者选项</code> 的 <code>OEM 解锁</code> 及 <code>USB 调试</code></p>
+<h3 id="13-解除-bl-锁">1.3 解除 BL 锁</h3>
+<p>手机连接电脑</p>
+<p>进 fastboot 模式</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb reboot bootloader
+</span></span></code></pre></div><p>解锁</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">fastboot flashing unlock
+</span></span></code></pre></div><p>解除 BL 锁会删除数据并重启，重启后重新 <a href="#%e5%bc%80%e5%90%af-usb-%e8%b0%83%e8%af%95" rel="">开启 USB 调试</a></p>
+<h3 id="14-刷入-twrp">1.4 刷入 TWRP</h3>
+<h4 id="141-有-recovery-分区">1.4.1 有 Recovery 分区</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb reboot bootloader
+</span></span><span class="line"><span class="cl">fastboot flash recovery twrp-&lt;version&gt;.img
+</span></span></code></pre></div><h4 id="142-无-recovery-分区">1.4.2 无 Recovery 分区</h4>
+<p>进入临时 TWRP</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb reboot bootloader
+</span></span><span class="line"><span class="cl">fastboot boot twrp-&lt;version&gt;.img
+</span></span></code></pre></div><p>上传加固包到手机</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb push twrp-installer-&lt;version&gt;.zip /tmp
+</span></span></code></pre></div><p>在 TWRP 中 <code>Install</code> &gt; <code>Install Image</code> 选择加固包并刷入</p>
+<blockquote>
+<p>在新版本 Android 中取消了 Recovery 分区，加入了 A/B 分区（系统更新或卡刷 rom 时会在另一个 inactive 的分区中执行，执行完成后切换到这个分区，如果执行失败则退回原来的分区，两个分区共享一套 userdata），而 Recovery 为 Boot 分区的一个部分，需要通过卡刷的方式刷入</p>
+</blockquote>
+<h2 id="2-刷入-windows">2 刷入 Windows</h2>
+<h3 id="21-设备支持情况">2.1 设备支持情况</h3>
+<p>查看 <a href="https://renegade-project.tech/en/state" target="_blank" rel="noopener noreffer ">设备支持情况</a> 以决定是否继续刷入</p>
+<h3 id="22-下载所需文件">2.2 下载所需文件</h3>
+<p>从 <a href="https://uupdump.net" target="_blank" rel="noopener noreffer ">UUP Dump</a> 下载 Arm 版 Windows 镜像</p>
+<p>从 <a href="https://github.com/edk2-porting/WOA-Drivers/releases" target="_blank" rel="noopener noreffer ">WOA</a> 下载对应设备驱动</p>
+<p>从 <a href="https://github.com/edk2-porting/edk2-msm/releases" target="_blank" rel="noopener noreffer ">edk2-msm</a> 下载对应设备 UEFI 镜像</p>
+<p>下载 <a href="https://developer.android.com/studio/releases/platform-tools" target="_blank" rel="noopener noreffer ">Android Platform Tools</a></p>
+<p>下载分区工具 <a href="https://wwu.lanzouy.com/ii0IW0b54wjc" target="_blank" rel="noopener noreffer ">parted</a></p>
+<h3 id="23-备份">2.3 备份</h3>
+<p>手机进入 TWRP 并连接电脑，备份调制解调器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb shell
+</span></span><span class="line"><span class="cl">dd <span class="k">if</span><span class="o">=</span>/dev/block/by-name/fsc <span class="nv">of</span><span class="o">=</span>/tmp/fsc
+</span></span><span class="line"><span class="cl">dd <span class="k">if</span><span class="o">=</span>/dev/block/by-name/fsg <span class="nv">of</span><span class="o">=</span>/tmp/fsg
+</span></span><span class="line"><span class="cl">dd <span class="k">if</span><span class="o">=</span>/dev/block/by-name/modemst1 <span class="nv">of</span><span class="o">=</span>/tmp/bootmodem_fs1
+</span></span><span class="line"><span class="cl">dd <span class="k">if</span><span class="o">=</span>/dev/block/by-name/modemst2 <span class="nv">of</span><span class="o">=</span>/tmp/bootmodem_fs2
+</span></span></code></pre></div><p>下载备份文件到电脑</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb pull /tmp/fsc
+</span></span><span class="line"><span class="cl">adb pull /tmp/fsg
+</span></span><span class="line"><span class="cl">adb pull /tmp/bootmodem_fs1
+</span></span><span class="line"><span class="cl">adb pull /tmp/bootmodem_fs2
+</span></span></code></pre></div><blockquote>
+<p>骁龙 845 及骁龙 855 设备需要配置调制解调器才能使数据及短信正常工作</p>
+</blockquote>
+<p>在 TWRP 中 <code>Backup</code> 选择 Data 分区备份</p>
+<p>下载备份文件到电脑</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb pull /sdcard/TWRP/BACKUPS
+</span></span></code></pre></div><blockquote>
+<p>中文乱码问题：中文字体存在 Data 分区中，需提前备份</p>
+</blockquote>
+<p>备份 boot</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb pull /dev/block/by-name/boot_a boot.img
+</span></span></code></pre></div><blockquote>
+<p>刷 root 权限需要</p>
+</blockquote>
+<h3 id="24-分区操作">2.4 分区操作</h3>
+<p>在 TWRP 中 <code>Mount</code> 取消 Data 分区挂载</p>
+<p>上传分区工具到手机</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb push parted /tmp
+</span></span></code></pre></div><p>授权及分区</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb shell
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /tmp
+</span></span><span class="line"><span class="cl">chmod +x parted
+</span></span><span class="line"><span class="cl">./parted /dev/block/sda
+</span></span></code></pre></div><p>打印分区信息</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">print
+</span></span></code></pre></div><p>压缩 userdata 分区</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">resizepart &lt;num&gt;  <span class="c1"># 如 resizepart 17 （userdata 在第 17 个分区），然后输入压缩后的 End 地址</span>
+</span></span></code></pre></div><p>创建 esp 分区</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mkpart esp fat32 &lt;start&gt; &lt;end&gt;  <span class="c1"># 如 mkpart esp fat32 20GB 20.3GB</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> &lt;num&gt; esp on  <span class="c1"># 如 set 18 esp on （esp 在第 18 个分区）</span>
+</span></span></code></pre></div><p>创建 win 分区</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mkpart win ntfs &lt;start&gt; &lt;end&gt;  <span class="c1"># 如 mkpart win ntfs 20.3GB -0MB</span>
+</span></span></code></pre></div><p>退出</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">quit
+</span></span></code></pre></div><p>退出 ADB Shell 后，在 TWRP 中 <code>Wipe</code> &gt; <code>Format Data</code> 格式化分区</p>
+<p>重启系统查看 Android 是否正常启动，正常启动后系统中文乱码，重启到 TWRP</p>
+<p>上传备份 Data 分区到手机</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb push BACKUPS /sdcard/TWRP
+</span></span></code></pre></div><p>在 TWRP 中 <code>Restore</code> 选择备份的 Data 分区还原</p>
+<p>再重启系统查看乱码是否正常了</p>
+<p>重启到 TWRP，执行格式化</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb shell mkfs.ntfs -f /dev/block/by-name/win -L WIN
+</span></span><span class="line"><span class="cl">adb shell mkfs.fat -F32 -s1 /dev/block/by-name/esp -n ESP
+</span></span></code></pre></div><h3 id="25-安装">2.5 安装</h3>
+<p>重启到 fastboot，启动 UEFI</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">fastboot boot boot.img
+</span></span></code></pre></div><p>选择 <code>Simple Init</code> &gt; <code>Mass Storage</code> 进入大容量存储模式</p>
+<p>进入 DISKPART</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">diskpart
+</span></span></code></pre></div><p>分配盘符</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">lis dis                               <span class="c1"># 获取磁盘信息</span>
+</span></span><span class="line"><span class="cl">sel dis &lt;num&gt;                         <span class="c1"># 如 sel dis 6 （手机磁盘为 6）</span>
+</span></span><span class="line"><span class="cl">lis par                               <span class="c1"># 获取分区信息</span>
+</span></span><span class="line"><span class="cl">sel par &lt;num&gt;                         <span class="c1"># 如 sel par 23 （esp 分区为 23）</span>
+</span></span><span class="line"><span class="cl">format quick <span class="nv">fs</span><span class="o">=</span>fat32 <span class="nv">label</span><span class="o">=</span><span class="s2">&#34;System&#34;</span>  <span class="c1"># 格式化</span>
+</span></span><span class="line"><span class="cl">assign <span class="nv">letter</span><span class="o">=</span><span class="s2">&#34;S&#34;</span>                     <span class="c1"># 分配盘符</span>
+</span></span><span class="line"><span class="cl">sel par &lt;num&gt;                         <span class="c1"># 如 sel par 24 （win 分区为 24）</span>
+</span></span><span class="line"><span class="cl">format quick <span class="nv">fs</span><span class="o">=</span>ntfs <span class="nv">label</span><span class="o">=</span><span class="s2">&#34;Windows&#34;</span>  <span class="c1"># 格式化</span>
+</span></span><span class="line"><span class="cl">assign <span class="nv">letter</span><span class="o">=</span><span class="s2">&#34;W&#34;</span>                     <span class="c1"># 分配盘符</span>
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span>
+</span></span></code></pre></div><p>获取镜像 index</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">dism /get-imageinfo /ImageFile:path<span class="se">\t</span>o<span class="se">\i</span>nstall.wim
+</span></span></code></pre></div><p>部署镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">dism /apply-image /ImageFile:&lt;path/to/install.wim&gt; /index:1 /ApplyDir:W:<span class="se">\
+</span></span></span></code></pre></div><p>添加引导</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">bcdboot W:<span class="se">\W</span>indows /s S: /f UEFI
+</span></span></code></pre></div><p>安装驱动</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">dism /Image:W: /Add-Driver /Driver:&lt;path to the driver folder&gt; /Recurse
+</span></span></code></pre></div><p>启用测试模式及禁用自动修复</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">cd</span> S:<span class="se">\E</span>FI<span class="se">\M</span>icrosoft<span class="se">\B</span>oot
+</span></span><span class="line"><span class="cl">bcdedit /store BCD /set <span class="s2">&#34;{default}&#34;</span> testsigning on
+</span></span><span class="line"><span class="cl">bcdedit /store BCD /set <span class="s2">&#34;{default}&#34;</span> nointegritychecks on
+</span></span><span class="line"><span class="cl">bcdedit /store BCD /set <span class="s2">&#34;{default}&#34;</span> recoveryenabled no
+</span></span></code></pre></div><p>取消挂载</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mountvol S: /d
+</span></span></code></pre></div><h3 id="26-启动">2.6 启动</h3>
+<p>重启到 fastboot，启动 UEFI</p>
+<p>成功进入 Windows 后，按 <code>Shift</code> + <code>F10</code> 调出命令行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">oobe<span class="se">\b</span>ypassnro  <span class="c1"># 设置离线安装 Win11</span>
+</span></span></code></pre></div><h3 id="27-修复">2.7 修复</h3>
+<p>重启到 TWRP，上传备份文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb push fsc /tmp
+</span></span><span class="line"><span class="cl">adb push fsg /tmp
+</span></span><span class="line"><span class="cl">adb push bootmodem_fs1 /tmp
+</span></span><span class="line"><span class="cl">adb push bootmodem_fs2 /tmp
+</span></span></code></pre></div><p>恢复备份文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">dd <span class="k">if</span><span class="o">=</span>/tmp/fsc <span class="nv">of</span><span class="o">=</span>/dev/block/by-name/fsc
+</span></span><span class="line"><span class="cl">dd <span class="k">if</span><span class="o">=</span>/tmp/fsg <span class="nv">of</span><span class="o">=</span>/dev/block/by-name/fsg
+</span></span><span class="line"><span class="cl">dd <span class="k">if</span><span class="o">=</span>/tmp/bootmodem_fs1 <span class="nv">of</span><span class="o">=</span>/dev/block/by-name/modemst1
+</span></span><span class="line"><span class="cl">dd <span class="k">if</span><span class="o">=</span>/tmp/bootmodem_fs2 <span class="nv">of</span><span class="o">=</span>/dev/block/by-name/modemst2
+</span></span></code></pre></div><h2 id="3-刷入-postmarketos">3 刷入 PostmarketOS</h2>
+<h3 id="31-下载所需文件">3.1 下载所需文件</h3>
+<p>下载设备对应 <a href="https://images.postmarketos.org/bpo/v24.12" target="_blank" rel="noopener noreffer ">image</a></p>
+<h3 id="32-分区操作">3.2 分区操作</h3>
+<blockquote>
+<p>中文乱码问题见上述刷入 Windows 的 <a href="#%e5%88%86%e5%8c%ba%e6%93%8d%e4%bd%9c" rel="">分区操作</a> 处理</p>
+</blockquote>
+<p>在 TWRP 中 <code>Mount</code> 取消 Data 分区挂载</p>
+<p>上传分区工具到手机</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb push parted /tmp
+</span></span></code></pre></div><p>授权及分区</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb shell
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /tmp
+</span></span><span class="line"><span class="cl">chmod +x parted
+</span></span><span class="line"><span class="cl">./parted /dev/block/sda
+</span></span></code></pre></div><p>打印分区信息</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">print
+</span></span></code></pre></div><p>压缩 userdata 分区</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">resizepart &lt;num&gt;  <span class="c1"># 如 resizepart 17 （userdata 在第 17 个分区），然后输入压缩后的 End 地址</span>
+</span></span></code></pre></div><p>创建 systempmos 分区</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mkpart systempmos ext4 &lt;start&gt; &lt;end&gt;  <span class="c1"># 如 mkpart systempmos ext4 90GB -0MB</span>
+</span></span></code></pre></div><p>退出</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">quit
+</span></span></code></pre></div><p>退出 ADB Shell 后，在 TWRP 中 <code>Wipe</code> &gt; <code>Format Data</code> 格式化分区</p>
+<p>重启到 TWRP，执行格式化</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb shell mke2fs /dev/block/by-name/systempmos
+</span></span></code></pre></div><h3 id="33-刷入镜像">3.3 刷入镜像</h3>
+<p>重启到 fastboot 刷入镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">fastboot set_active b
+</span></span><span class="line"><span class="cl">fastboot erase dtbo_b
+</span></span><span class="line"><span class="cl">fastboot flash boot &lt;pmos-boot.img&gt;
+</span></span><span class="line"><span class="cl">fastboot flash systempmos &lt;pmos.img&gt;
+</span></span></code></pre></div><h3 id="34-android-与-postmarketos-切换">3.4 Android 与 PostmarketOS 切换</h3>
+<h4 id="341-android-下">3.4.1 Android 下</h4>
+<p>重启到 TWRP</p>
+<p>在 TWRP 中 <code>Reboot</code> 选择 <code>Slot B</code>，重启则切换到 PostmarketOS</p>
+<h4 id="342-postmarketos-下">3.4.2 PostmarketOS 下</h4>
+<p>切换 Slot</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sudo qbootctl -s a
+</span></span></code></pre></div><p>重启则切换到 Android</p>
+<h2 id="4-刷入-mobian">4 刷入 Mobian</h2>
+<h3 id="41-下载所需文件">4.1 下载所需文件</h3>
+<p>下载设备对应 <a href="https://images.mobian.org/qcom/weekly" target="_blank" rel="noopener noreffer ">image</a></p>
+<h3 id="42-分区操作">4.2 分区操作</h3>
+<blockquote>
+<p>中文乱码问题见上述刷入 Windows 的 <a href="#%e5%88%86%e5%8c%ba%e6%93%8d%e4%bd%9c" rel="">分区操作</a> 处理</p>
+</blockquote>
+<p>在 TWRP 中 <code>Mount</code> 取消 Data 分区挂载</p>
+<p>上传分区工具到手机</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb push parted /tmp
+</span></span></code></pre></div><p>授权及分区</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb shell
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /tmp
+</span></span><span class="line"><span class="cl">chmod +x parted
+</span></span><span class="line"><span class="cl">./parted /dev/block/sda
+</span></span></code></pre></div><p>打印分区信息</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">print
+</span></span></code></pre></div><p>压缩 userdata 分区</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">resizepart &lt;num&gt;  <span class="c1"># 如 resizepart 17 （userdata 在第 17 个分区），然后输入压缩后的 End 地址</span>
+</span></span></code></pre></div><p>创建 mobian 分区</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mkpart mobian ext4 &lt;start&gt; &lt;end&gt;  <span class="c1"># 如 mkpart mobian ext4 90GB -0MB</span>
+</span></span></code></pre></div><p>退出</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">quit
+</span></span></code></pre></div><p>退出 ADB Shell 后，在 TWRP 中 <code>Wipe</code> &gt; <code>Format Data</code> 格式化分区</p>
+<p>重启到 TWRP，执行格式化</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb shell mke2fs /dev/block/by-name/mobian
+</span></span></code></pre></div><h3 id="43-刷入镜像">4.3 刷入镜像</h3>
+<p>重启到 fastboot 刷入镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">fastboot set_active b
+</span></span><span class="line"><span class="cl">fastboot erase dtbo_b
+</span></span><span class="line"><span class="cl">fastboot flash boot &lt;mobian-boot.img&gt;
+</span></span><span class="line"><span class="cl">fastboot flash mobian &lt;mobian.img&gt;
+</span></span></code></pre></div><h2 id="5-刷入-pixelexperience">5 刷入 PixelExperience</h2>
+<h3 id="51-前置准备">5.1 前置准备</h3>
+<h4 id="511-升级系统">5.1.1 升级系统</h4>
+<p>升级到 <a href="https://download.h2os.com/OnePlus6T/MP/OnePlus6THydrogen_34.K.62_OTA_0620_all_2112282145_db7672c020714abb.zip" target="_blank" rel="noopener noreffer ">HydrogenOS 11</a> 或 <a href="https://download.h2os.com/OnePlus6T/MP/OnePlus6THydrogen_34.K.62_OTA_0620_all_2112282145_db7672c020714abb.zip" target="_blank" rel="noopener noreffer ">OxygenOS 11</a></p>
+<h4 id="512-分区固件同步">5.1.2 分区固件同步</h4>
+<p>下载同步包 <a href="https://github.com/PixelExperience-Devices/blobs/blob/main/copy-partitions-20210323_1922.zip?raw=true" target="_blank" rel="noopener noreffer ">copy-partitions-20210323_1922.zip</a></p>
+<p>重启到 TWRP，在 TWRP 中 <code>Apply Update</code> 选择 <code>Apply from ADB</code>，刷入同步包</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb sideload copy-partitions-20210323_1922.zip
+</span></span></code></pre></div><h4 id="513-初始化动态分区">5.1.3 初始化动态分区</h4>
+<p>重启到 fastboot</p>
+<p>刷入 <a href="https://sourceforge.net/projects/sn-roms/files/PixelExperience-13/fajita/vbmeta.img/download" target="_blank" rel="noopener noreffer ">vbmeta</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">fastboot flash vbmeta_a vbmeta.img
+</span></span><span class="line"><span class="cl">fastboot flash vbmeta_b vbmeta.img
+</span></span></code></pre></div><p>刷入 <a href="https://get.pixelexperience.org/changelog/fajita/PixelExperience_fajita-13.0-20231124-0247-OFFICIAL.img" target="_blank" rel="noopener noreffer ">recovery</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">fastboot flash boot &lt;recovery_filename&gt;.img
+</span></span></code></pre></div><p>擦除旧分区数据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">fastboot erase system_a
+</span></span><span class="line"><span class="cl">fastboot erase system_b
+</span></span><span class="line"><span class="cl">fastboot erase odm_a
+</span></span><span class="line"><span class="cl">fastboot erase odm_b
+</span></span><span class="line"><span class="cl">fastboot erase vendor_a
+</span></span><span class="line"><span class="cl">fastboot erase vendor_b
+</span></span></code></pre></div><p>重启到 recovery 再进入 fastboot</p>
+<p>刷入 <a href="https://sourceforge.net/projects/sn-roms/files/PixelExperience-13/fajita/super_empty.img/download" target="_blank" rel="noopener noreffer ">super_empty</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 当前为 a 分区</span>
+</span></span><span class="line"><span class="cl">fastboot wipe-super super_empty.img
+</span></span><span class="line"><span class="cl">fastboot set_active b
+</span></span><span class="line"><span class="cl">fastboot wipe-super super_empty.img
+</span></span><span class="line"><span class="cl">fastboot set_active a
+</span></span></code></pre></div><h3 id="52-刷入镜像">5.2 刷入镜像</h3>
+<p>下载 <a href="https://get.pixelexperience.org/changelog/fajita/PixelExperience_fajita-13.0-20231124-0247-OFFICIAL.zip" target="_blank" rel="noopener noreffer ">PixelExperience</a></p>
+<p>重启到 recovery，在 recovery 中 <code>Apply Update</code> 选择 <code>Apply from ADB</code>，刷入</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">adb sideload filename.zip
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-02-09</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/other/chapter12/" data-title="一加 6T 刷入 Windows 及 Linux 等系统" data-hashtags="linux"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/other/chapter12/" data-hashtag="linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/other/chapter12/" data-title="一加 6T 刷入 Windows 及 Linux 等系统"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/other/chapter12/" data-title="一加 6T 刷入 Windows 及 Linux 等系统"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/other/chapter12/" data-title="一加 6T 刷入 Windows 及 Linux 等系统"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/other/chapter11/" class="prev" rel="prev" title="远程桌面协议 XRDP"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>远程桌面协议 XRDP</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

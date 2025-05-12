@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Jenkins 自动化部署 - 我的全新 Hugo 网站</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Jenkins 自动化部署" />
+<meta property="og:description" content="介绍 Jenkins 是一个开源软件项目，是基于 Java 开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件项目可以进行持续集成" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/ops/chapter13/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-07-12T15:00:00+08:00" />
+<meta property="article:modified_time" content="2024-07-12T15:00:00+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Jenkins 自动化部署"/>
+<meta name="twitter:description" content="介绍 Jenkins 是一个开源软件项目，是基于 Java 开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件项目可以进行持续集成"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/ops/chapter13/" /><link rel="prev" href="http://example.org/posts/dev/chapter12/" /><link rel="next" href="http://example.org/posts/dev/chapter13/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Jenkins 自动化部署",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/ops\/chapter13\/"
+        },"genre": "posts","keywords": "linux","wordcount":  673 ,
+        "url": "http:\/\/example.org\/posts\/ops\/chapter13\/","datePublished": "2024-07-12T15:00:00+08:00","dateModified": "2024-07-12T15:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "strr0"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Jenkins 自动化部署</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-12">2024-07-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;673 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#1-部署">1 部署</a>
+      <ul>
+        <li><a href="#11-环境要求">1.1 环境要求</a></li>
+        <li><a href="#12-安装及初始化">1.2 安装及初始化</a></li>
+        <li><a href="#13-问题与修复">1.3 问题与修复</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-使用">2 使用</a>
+      <ul>
+        <li><a href="#21-基础">2.1 基础</a></li>
+        <li><a href="#22-maven-项目配置">2.2 Maven 项目配置</a></li>
+        <li><a href="#23-问题与修复">2.3 问题与修复</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="介绍">介绍</h2>
+<p>Jenkins 是一个开源软件项目，是基于 Java 开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件项目可以进行持续集成。</p>
+<h2 id="1-部署">1 部署</h2>
+<h3 id="11-环境要求">1.1 环境要求</h3>
+<ul>
+<li>机器要求：</li>
+</ul>
+<p>256 MB 内存，建议大于 512 MB</p>
+<p>10 GB 的硬盘空间（用于 Jenkins 和 Docker 镜像）</p>
+<ul>
+<li>需要安装以下软件：</li>
+</ul>
+<p>Java 8 （JRE 或者 JDK 都可以）</p>
+<p>Docker （导航到网站顶部的 Get Docker 链接以访问适合您平台的 Docker 下载）</p>
+<h3 id="12-安装及初始化">1.2 安装及初始化</h3>
+<h4 id="121-下载">1.2.1 下载</h4>
+<p>下载 <a href="http://mirrors.jenkins.io/war-stable/latest/jenkins.war" target="_blank" rel="noopener noreffer ">Jenkins</a></p>
+<h4 id="122-运行">1.2.2 运行</h4>
+<p>打开终端进入到下载目录，运行命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">java -jar jenkins.war --httpPort<span class="o">=</span><span class="m">8080</span>
+</span></span></code></pre></div><p>打开浏览器进入链接 <a href="http://localhost:8080" target="_blank" rel="noopener noreffer ">http://localhost:8080</a> 按照说明完成安装</p>
+<h4 id="123-配置国内镜像">1.2.3 配置国内镜像</h4>
+<p>进入 jenkins 工作目录（如 /home/centos/.jenkins）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /home/centos/.jenkins
+</span></span></code></pre></div><p>修改 hudson.model.UpdateCenter.xml</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#39;1.1&#39; encoding=&#39;UTF-8&#39;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;sites&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;site&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;id&gt;</span>default<span class="nt">&lt;/id&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;url&gt;</span>https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json<span class="nt">&lt;/url&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/site&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/sites&gt;</span>
+</span></span></code></pre></div><p>修改 updates/default.json，全文替换地址</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">:%s/www.google.com/www.baidu.com/g
+</span></span><span class="line"><span class="cl">:%s/https:<span class="se">\/\/</span>updates.jenkins.io<span class="se">\/</span>download/https:<span class="se">\/\/</span>mirrors.tuna.tsinghua.edu.cn<span class="se">\/</span>jenkins/g
+</span></span></code></pre></div><h4 id="124-重启">1.2.4 重启</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nohup java -jar jenkins.war --httpPort<span class="o">=</span><span class="m">8080</span> &gt; jenkins.log <span class="p">&amp;</span>
+</span></span></code></pre></div><h3 id="13-问题与修复">1.3 问题与修复</h3>
+<p>无法访问 jenkins，检查端口是否开放</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">firewall-cmd --list-ports
+</span></span></code></pre></div><p>如果端口未开放，运行如下命令开放</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">firewall-cmd --permanent --zone<span class="o">=</span>public --add-port<span class="o">=</span>8080/tcp
+</span></span><span class="line"><span class="cl">systemctl reload firewalld
+</span></span></code></pre></div><h2 id="2-使用">2 使用</h2>
+<h3 id="21-基础">2.1 基础</h3>
+<h4 id="211-插件安装">2.1.1 插件安装</h4>
+<p>Manage Jenkins &gt; Plugins &gt; Available plugins</p>
+<ul>
+<li>Maven Integration plugin</li>
+<li>Git plugin</li>
+</ul>
+<h4 id="212-全局配置">2.1.2 全局配置</h4>
+<p>Manage Jenkins &gt; Tools</p>
+<p>配置 jdk、maven、git 等</p>
+<h4 id="213-凭证配置">2.1.3 凭证配置</h4>
+<p>Manage Jenkins &gt; Credentials</p>
+<p>在 Stores scoped to Jenkins 列表的 Domains 下面 (global) 点击 Add credentials</p>
+<h3 id="22-maven-项目配置">2.2 Maven 项目配置</h3>
+<h4 id="221-构建一个-maven-项目">2.2.1 构建一个 maven 项目</h4>
+<p>如 springboot-demo</p>
+<h4 id="222-配置源代码">2.2.2 配置源代码</h4>
+<p>在 Source Code Management 选择 Git</p>
+<p>配置仓库地址和凭证及分支等信息</p>
+<h4 id="223-配置-maven-options">2.2.3 配置 maven options</h4>
+<p>如 clean package -U -Dmaven.test.skip=true</p>
+<h4 id="224-配置后置脚本">2.2.4 配置后置脚本</h4>
+<p>在 Post Steps 底下点击 Add post-build step 选择 Execute shell</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nv">BUILD_ID</span><span class="o">=</span>springboot-demo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">JVM_OPTION</span><span class="o">=</span><span class="s2">&#34;-Xms256m -Xmx1024m&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">FILE_PATH</span><span class="o">=</span><span class="s2">&#34;/home/centos/workspace/springboot-demo/springboot-demo.jar&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">LOG_PATH</span><span class="o">=</span><span class="s2">&#34;/home/centos/workspace/springboot-demo/springboot-demo.out&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">PROFILES</span><span class="o">=</span><span class="s2">&#34;prod&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">PID</span><span class="o">=</span><span class="sb">`</span>ps -ef <span class="p">|</span> grep springboot-demo <span class="p">|</span> grep java <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> ! -z <span class="s2">&#34;</span><span class="nv">$PID</span><span class="s2">&#34;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">then</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">kill</span> -9 <span class="nv">$PID</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">rm -rf <span class="nv">$FILE_PATH</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cp /home/centos/.jenkins/workspace/springboot-demo/target/springboot-demo.jar <span class="nv">$FILE_PATH</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nohup java -jar -Dspring.profiles.active<span class="o">=</span><span class="nv">$PROFILES</span> <span class="nv">$JVM_OPTION</span> <span class="nv">$FILE_PATH</span> &gt;&gt; <span class="nv">$LOG_PATH</span> 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</span></span></code></pre></div><h4 id="225-配置后置脚本docker">2.2.5 配置后置脚本（docker）</h4>
+<p>在 Post Steps 底下点击 Add post-build step 选择 Execute shell</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nv">BUILD_ID</span><span class="o">=</span>springboot-demo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">containerId</span><span class="o">=</span><span class="sb">`</span>docker ps -a <span class="p">|</span> grep springboot-demo <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> ! -z <span class="s2">&#34;</span><span class="nv">$containerId</span><span class="s2">&#34;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">then</span>
+</span></span><span class="line"><span class="cl">   docker stop <span class="nv">$containerId</span>
+</span></span><span class="line"><span class="cl">   docker rm <span class="nv">$containerId</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="nv">imageId</span><span class="o">=</span><span class="sb">`</span>docker images <span class="p">|</span> grep springboot-demo <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> ! -z <span class="s2">&#34;</span><span class="nv">$imageId</span><span class="s2">&#34;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">then</span>
+</span></span><span class="line"><span class="cl">   docker rmi <span class="nv">$imageId</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker build -t <span class="s2">&#34;springboot-demo:1.0&#34;</span> springboot-demo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker run -d --name springboot-demo -p 8081:8080 -v /home/centos/workspace/springboot-demo/config:/config springboot-demo:1.0
+</span></span></code></pre></div><h3 id="23-问题与修复">2.3 问题与修复</h3>
+<h4 id="jenkins-拉取代码报-hudsonpluginsgitgitexception-failed-to-fetch-from-xxx">Jenkins 拉取代码报 hudson.plugins.git.GitException: Failed to fetch from xxx</h4>
+<p>配置 git 仓库地址加上 .git 后缀</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-07-12</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/ops/chapter13/" data-title="Jenkins 自动化部署" data-hashtags="linux"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/ops/chapter13/" data-hashtag="linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/ops/chapter13/" data-title="Jenkins 自动化部署"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/ops/chapter13/" data-title="Jenkins 自动化部署"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/ops/chapter13/" data-title="Jenkins 自动化部署"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/dev/chapter12/" class="prev" rel="prev" title="基于 Sa-Token 实现单点登录"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>基于 Sa-Token 实现单点登录</a>
+            <a href="/posts/dev/chapter13/" class="next" rel="next" title="ShardingSphere 分库分表">ShardingSphere 分库分表<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

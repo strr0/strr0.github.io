@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Linux 环境下 Docker 的安装与使用 - 我的全新 Hugo 网站</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Linux 环境下 Docker 的安装与使用" />
+<meta property="og:description" content="介绍 Docker Engine 是一种开源容器化技术，用于构建和容器化应用程序。 1 环境要求 64 位系统 内核版本 3.10 及以上 iptables 版本 1.4 及以上 git 版本 1.7 及以上 ps 命令（procps 或" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/ops/chapter1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-11-24T10:00:00+08:00" />
+<meta property="article:modified_time" content="2024-11-24T10:00:00+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Linux 环境下 Docker 的安装与使用"/>
+<meta name="twitter:description" content="介绍 Docker Engine 是一种开源容器化技术，用于构建和容器化应用程序。 1 环境要求 64 位系统 内核版本 3.10 及以上 iptables 版本 1.4 及以上 git 版本 1.7 及以上 ps 命令（procps 或"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/ops/chapter1/" /><link rel="prev" href="http://example.org/posts/ops/chapter6/" /><link rel="next" href="http://example.org/posts/dev/chapter16/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Linux 环境下 Docker 的安装与使用",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/ops\/chapter1\/"
+        },"genre": "posts","keywords": "linux, mysql","wordcount":  1014 ,
+        "url": "http:\/\/example.org\/posts\/ops\/chapter1\/","datePublished": "2024-11-24T10:00:00+08:00","dateModified": "2024-11-24T10:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "strr0"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux 环境下 Docker 的安装与使用</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-11-24">2024-11-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1014 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#1-环境要求">1 环境要求</a></li>
+    <li><a href="#2-安装">2 安装</a>
+      <ul>
+        <li><a href="#21-获取二进制文件">2.1 获取二进制文件</a></li>
+        <li><a href="#22-安装二进制文件">2.2 安装二进制文件</a></li>
+        <li><a href="#23-运行">2.3 运行</a></li>
+        <li><a href="#24-配置国内镜像源">2.4 配置国内镜像源</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-使用">3 使用</a>
+      <ul>
+        <li><a href="#31-基础操作">3.1 基础操作</a></li>
+        <li><a href="#32-网络">3.2 网络</a></li>
+        <li><a href="#33-文件磁盘">3.3 文件磁盘</a></li>
+        <li><a href="#34-导入导出">3.4 导入导出</a></li>
+        <li><a href="#35-代理">3.5 代理</a></li>
+        <li><a href="#36-其他操作">3.6 其他操作</a></li>
+        <li><a href="#37-构建镜像">3.7 构建镜像</a></li>
+        <li><a href="#38-插件docker-compose">3.8 插件（docker compose）</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-其他问题">4 其他问题</a>
+      <ul>
+        <li><a href="#41-普通用户-permission-denied-问题">4.1 普通用户 permission denied 问题</a></li>
+        <li><a href="#42-开启远程访问">4.2 开启远程访问</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="介绍">介绍</h2>
+<p><a href="https://docs.docker.com/engine/install/binaries/" target="_blank" rel="noopener noreffer ">Docker Engine</a> 是一种开源容器化技术，用于构建和容器化应用程序。</p>
+<h2 id="1-环境要求">1 环境要求</h2>
+<ul>
+<li>64 位系统</li>
+<li>内核版本 3.10 及以上</li>
+<li>iptables 版本 1.4 及以上</li>
+<li>git 版本 1.7 及以上</li>
+<li>ps 命令（procps 或其他包提供）</li>
+<li>XZ Utils 版本 4.9 及以上</li>
+<li>cgroupfs</li>
+</ul>
+<h2 id="2-安装">2 安装</h2>
+<h3 id="21-获取二进制文件">2.1 获取二进制文件</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://download.docker.com/linux/static/stable/&lt;architecture&gt;/docker-&lt;version&gt;.tgz
+</span></span></code></pre></div><h3 id="22-安装二进制文件">2.2 安装二进制文件</h3>
+<p>解压</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar -xzvf docker-&lt;version&gt;.tgz
+</span></span></code></pre></div><p>安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo cp docker/* /usr/bin/
+</span></span></code></pre></div><h3 id="23-运行">2.3 运行</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo dockerd <span class="p">&amp;</span>
+</span></span></code></pre></div><h3 id="24-配置国内镜像源">2.4 配置国内镜像源</h3>
+<p>修改 /etc/docker/daemon.json</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;registry-mirrors&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;https://docker.m.daocloud.io&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;https://docker.1panel.live&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>重启 docker</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nv">PID</span><span class="o">=</span><span class="sb">`</span>ps -ef <span class="p">|</span> grep dockerd <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> ! -z <span class="s2">&#34;</span><span class="nv">$PID</span><span class="s2">&#34;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">then</span>
+</span></span><span class="line"><span class="cl">   sudo <span class="nb">kill</span> -9 <span class="nv">$PID</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">sudo dockerd <span class="p">&amp;</span>
+</span></span></code></pre></div><h2 id="3-使用">3 使用</h2>
+<h3 id="31-基础操作">3.1 基础操作</h3>
+<p>查看镜像列表</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker images
+</span></span></code></pre></div><p>查看容器列表</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker ps -a
+</span></span></code></pre></div><p>拉取镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker pull &lt;myimage&gt;:&lt;version&gt;
+</span></span></code></pre></div><p>删除镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker rmi &lt;myimage&gt;
+</span></span></code></pre></div><p>运行容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -dit <span class="se">\ </span>            <span class="c1"># -d 后台运行 -i 交互形式 -t tty</span>
+</span></span><span class="line"><span class="cl">    --name &lt;mycontainer&gt; <span class="se">\ </span>   <span class="c1"># --name 容器名</span>
+</span></span><span class="line"><span class="cl">    -p 8080:8080 <span class="se">\ </span>           <span class="c1"># -p 端口映射</span>
+</span></span><span class="line"><span class="cl">    &lt;myimage&gt;:&lt;version&gt;
+</span></span></code></pre></div><p>修改容器默认命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --name &lt;mycontainer&gt; <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    &lt;myimage&gt;:&lt;version&gt; &lt;mycommand&gt;
+</span></span></code></pre></div><p>停止容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker stop &lt;mycontainer&gt;
+</span></span></code></pre></div><p>删除容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker rm &lt;mycontainer&gt;
+</span></span></code></pre></div><p>进入容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it &lt;mycontainer&gt; /bin/bash
+</span></span></code></pre></div><p>查看日志</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker logs -f --tail <span class="m">100</span> &lt;mycontainer&gt;
+</span></span></code></pre></div><h3 id="32-网络">3.2 网络</h3>
+<h4 id="321-操作">3.2.1 操作</h4>
+<p>查看网络列表</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker network ls
+</span></span></code></pre></div><p>创建网络</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker network create &lt;mynetwork&gt;
+</span></span></code></pre></div><p>删除网络</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker network rm &lt;mynetwork&gt;
+</span></span></code></pre></div><h4 id="322-使用">3.2.2 使用</h4>
+<p>运行容器指定连接网络</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --name &lt;mycontainer&gt; <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --net &lt;mynetwork&gt; <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    &lt;myimage&gt;:&lt;version&gt;
+</span></span></code></pre></div><p>已有容器连接网络</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker network connect &lt;mynetwork&gt; &lt;mycontainer&gt;
+</span></span></code></pre></div><blockquote>
+<p>连接至相同网络的容器可以通过 http://mycontainer:port 相互访问</p>
+</blockquote>
+<h3 id="33-文件磁盘">3.3 文件磁盘</h3>
+<p>复制容器文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker cp &lt;mycontainer&gt;:/path/in/container /path/on/host
+</span></span></code></pre></div><p>磁盘空间查看</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker system df
+</span></span></code></pre></div><p>磁盘空间清理</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker system prune -a
+</span></span></code></pre></div><p>强制清理（需先停止 docker 服务）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf /var/lib/docker
+</span></span></code></pre></div><h3 id="34-导入导出">3.4 导入导出</h3>
+<p>导出镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker save -o &lt;myimage_version&gt;.tar &lt;myimage&gt;:&lt;version&gt;
+</span></span></code></pre></div><p>导入镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker load -i &lt;myimage_version&gt;.tar
+</span></span></code></pre></div><p>导出容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker <span class="nb">export</span> -o &lt;mycontainer&gt;.tar &lt;mycontainer&gt;
+</span></span></code></pre></div><p>导入容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker import &lt;mycontainer&gt;.tar &lt;myimage&gt;:&lt;version&gt;
+</span></span></code></pre></div><h3 id="35-代理">3.5 代理</h3>
+<p>使用 dockerd 命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo dockerd --http-proxy<span class="o">=</span>socks5://127.0.0.1:1080 --https-proxy<span class="o">=</span>socks5://127.0.0.1:1080 <span class="p">&amp;</span>
+</span></span></code></pre></div><p>使用 daemon.json 配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;proxies&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;http-proxy&#34;</span><span class="p">:</span> <span class="s2">&#34;http://proxy.example.com:3128&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;https-proxy&#34;</span><span class="p">:</span> <span class="s2">&#34;https://proxy.example.com:3129&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;no-proxy&#34;</span><span class="p">:</span> <span class="s2">&#34;*.test.example.com,.example.org,127.0.0.0/8&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="36-其他操作">3.6 其他操作</h3>
+<p>获取容器 command</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker inspect --format <span class="s1">&#39;{{.Config.Cmd}}&#39;</span> &lt;mycontainer&gt;
+</span></span></code></pre></div><p>修改镜像名称和 tag</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker tag &lt;oldname&gt;:&lt;oldtag&gt; &lt;newname&gt;:&lt;newtag&gt;
+</span></span></code></pre></div><p>判断容器是否存在</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nv">ID</span> <span class="o">=</span> <span class="sb">`</span>docker ps -a <span class="p">|</span> grep &lt;mycontainer&gt; <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> ! -z <span class="s2">&#34;</span><span class="nv">$ID</span><span class="s2">&#34;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">#...</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></div><p>判断镜像是否存在</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nv">ID</span> <span class="o">=</span> <span class="sb">`</span>docker images <span class="p">|</span> grep &lt;myimage&gt; <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> ! -z <span class="s2">&#34;</span><span class="nv">$ID</span><span class="s2">&#34;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">#...</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></div><h3 id="37-构建镜像">3.7 构建镜像</h3>
+<h4 id="371-编写-dockerfile">3.7.1 编写 Dockerfile</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> openjdk:17-jdk-alpine3.14</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> mkdir -p /app/lib <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    /app/config <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">SERVER_PORT</span><span class="o">=</span><span class="m">9201</span> <span class="nv">LANG</span><span class="o">=</span>C.UTF-8 <span class="nv">LC_ALL</span><span class="o">=</span>C.UTF-8 <span class="nv">JAVA_OPTS</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> ${SERVER_PORT}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ADD</span> lib/* lib<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ADD</span> config/* config<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ADD</span> demo.jar app.jar<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> java -Djava.security.egd<span class="o">=</span>file:/dev/./urandom -Dserver.port<span class="o">=</span><span class="si">${</span><span class="nv">SERVER_PORT</span><span class="si">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>           -jar app.jar <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>           -XX:+HeapDumpOnOutOfMemoryError -Xlog:gc*,:time,tags,level -XX:+UseZGC <span class="si">${</span><span class="nv">JAVA_OPTS</span><span class="si">}</span><span class="err">
+</span></span></span></code></pre></div><h4 id="372-构建">3.7.2 构建</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t &lt;myimage&gt;:&lt;version&gt; &lt;dockerfilepath&gt;
+</span></span></code></pre></div><h4 id="373-运行与停止">3.7.3 运行与停止</h4>
+<p>运行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nv">img</span><span class="o">=</span><span class="s2">&#34;demo&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">version</span><span class="o">=</span><span class="k">$(</span>date <span class="s2">&#34;+%Y-%m-%d&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">imgId</span><span class="o">=</span><span class="sb">`</span>docker images <span class="p">|</span> grep <span class="nv">$img</span> <span class="p">|</span> grep <span class="nv">$version</span> <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> ! -z <span class="s2">&#34;</span><span class="nv">$imgId</span><span class="s2">&#34;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">then</span>
+</span></span><span class="line"><span class="cl">  docker rmi <span class="nv">$imgId</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker build -t <span class="nv">$img</span>:<span class="nv">$version</span> .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker run --name <span class="nv">$img</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -p 8080:8080 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -d <span class="nv">$img</span>:<span class="nv">$version</span>
+</span></span></code></pre></div><p>停止</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nv">app</span><span class="o">=</span><span class="s2">&#34;demo&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">appId</span><span class="o">=</span><span class="sb">`</span>docker ps -a <span class="p">|</span> grep <span class="nv">$app</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> ! -z <span class="s2">&#34;</span><span class="nv">$appId</span><span class="s2">&#34;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">then</span>
+</span></span><span class="line"><span class="cl">  docker stop <span class="nv">$appId</span>
+</span></span><span class="line"><span class="cl">  docker rm <span class="nv">$appId</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></div><h3 id="38-插件docker-compose">3.8 插件（docker compose）</h3>
+<h4 id="381-安装">3.8.1 安装</h4>
+<p>下载及安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -SL https://github.com/docker/compose/releases/download/&lt;version&gt;/docker-compose-linux-&lt;architecture&gt; -o /usr/local/bin/docker-compose
+</span></span></code></pre></div><p>赋予权限</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod +x /usr/local/bin/docker-compose
+</span></span></code></pre></div><p>验证安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker-compose --version
+</span></span></code></pre></div><h4 id="382-使用">3.8.2 使用</h4>
+<p>基本配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c"># docker-compose.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mysql</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mysql:8.0.33</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 时区上海</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">TZ</span><span class="p">:</span><span class="w"> </span><span class="l">Asia/Shanghai</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># root 密码</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 初始化数据库(后续的初始化sql会在这个库执行)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l">sampledb</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;3306:3306&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 数据挂载</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/docker/mysql/data/:/var/lib/mysql/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 配置挂载</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/docker/mysql/conf/:/etc/mysql/conf.d/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 将mysql8.0默认密码策略 修改为 原先 策略 (mysql8.0对其默认策略做了更改 会导致密码无法匹配)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>--<span class="l">default-authentication-plugin=mysql_native_password</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>--<span class="l">character-set-server=utf8mb4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>--<span class="l">collation-server=utf8mb4_general_ci</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>--<span class="l">explicit_defaults_for_timestamp=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>--<span class="l">lower_case_table_names=1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;host&#34;</span><span class="w">
+</span></span></span></code></pre></div><p>运行指定配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker-compose -f docker-compose.yml up -d
+</span></span></code></pre></div><h2 id="4-其他问题">4 其他问题</h2>
+<h3 id="41-普通用户-permission-denied-问题">4.1 普通用户 permission denied 问题</h3>
+<p>创建 docker 组（若不存在）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo groupadd docker
+</span></span></code></pre></div><p>将当前用户添加到 docker 组</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo usermod -aG docker <span class="nv">$USER</span>
+</span></span></code></pre></div><p>更新用户组</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">newgrp docker
+</span></span></code></pre></div><blockquote>
+<p>如果问题仍然存在，尝试重启 docker 服务</p>
+</blockquote>
+<h3 id="42-开启远程访问">4.2 开启远程访问</h3>
+<p>修改 docker.service</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># /lib/systemd/system/docker.service</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 注释如下</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改为</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
+</span></span></code></pre></div><p>重启 docker</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl daemon-reload <span class="p">&amp;</span> systemctl restart docker
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-11-24</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/ops/chapter1/" data-title="Linux 环境下 Docker 的安装与使用" data-hashtags="linux,mysql"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/ops/chapter1/" data-hashtag="linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/ops/chapter1/" data-title="Linux 环境下 Docker 的安装与使用"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/ops/chapter1/" data-title="Linux 环境下 Docker 的安装与使用"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/ops/chapter1/" data-title="Linux 环境下 Docker 的安装与使用"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/mysql/">MySQL</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/ops/chapter6/" class="prev" rel="prev" title="Linux 环境下 Nginx 的安装与使用"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Linux 环境下 Nginx 的安装与使用</a>
+            <a href="/posts/dev/chapter16/" class="next" rel="next" title="Spring 整合 OAuth2">Spring 整合 OAuth2<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

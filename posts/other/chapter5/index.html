@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>ArchLinux 下 Hyprland 配置 - 我的全新 Hugo 网站</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="ArchLinux 下 Hyprland 配置" />
+<meta property="og:description" content="介绍 Hyprland 是一款基于 Wayland 的平铺式窗口管理器 1 基础 1.1 安装 Hyprland 安装依赖 yay -S hyprland 复制配置文件 mkdir -pv ~/.config/hypr cp /usr/share/hyprland/hyprland.conf ~/.config/hypr 1.2 配置 快捷键绑定 bind = SUPER, T, exec, foot --override shell=fish 设置环境变量 env = XCURSOR_SIZE, 24" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/other/chapter5/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-11-02T10:00:00+08:00" />
+<meta property="article:modified_time" content="2024-11-02T10:00:00+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="ArchLinux 下 Hyprland 配置"/>
+<meta name="twitter:description" content="介绍 Hyprland 是一款基于 Wayland 的平铺式窗口管理器 1 基础 1.1 安装 Hyprland 安装依赖 yay -S hyprland 复制配置文件 mkdir -pv ~/.config/hypr cp /usr/share/hyprland/hyprland.conf ~/.config/hypr 1.2 配置 快捷键绑定 bind = SUPER, T, exec, foot --override shell=fish 设置环境变量 env = XCURSOR_SIZE, 24"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/other/chapter5/" /><link rel="prev" href="http://example.org/posts/other/chapter6/" /><link rel="next" href="http://example.org/posts/other/chapter7/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ArchLinux 下 Hyprland 配置",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/other\/chapter5\/"
+        },"genre": "posts","wordcount":  944 ,
+        "url": "http:\/\/example.org\/posts\/other\/chapter5\/","datePublished": "2024-11-02T10:00:00+08:00","dateModified": "2024-11-02T10:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "strr0"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ArchLinux 下 Hyprland 配置</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-category">included in <a href="/categories/other/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>其他</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-11-02">2024-11-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;944 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#1-基础">1 基础</a>
+      <ul>
+        <li><a href="#11-安装-hyprland">1.1 安装 Hyprland</a></li>
+        <li><a href="#12-配置">1.2 配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-其他">2 其他</a>
+      <ul>
+        <li><a href="#21-终端">2.1 终端</a></li>
+        <li><a href="#22-应用启动器">2.2 应用启动器</a></li>
+        <li><a href="#23-壁纸">2.3 壁纸</a></li>
+        <li><a href="#24-状态栏">2.4 状态栏</a></li>
+        <li><a href="#25-音频">2.5 音频</a></li>
+        <li><a href="#26-亮度">2.6 亮度</a></li>
+        <li><a href="#27-输入法">2.7 输入法</a></li>
+        <li><a href="#28-文件管理">2.8 文件管理</a></li>
+        <li><a href="#29-复制及截图">2.9 复制及截图</a></li>
+        <li><a href="#210-锁屏">2.10 锁屏</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="介绍">介绍</h2>
+<p>Hyprland 是一款基于 Wayland 的平铺式窗口管理器</p>
+<h2 id="1-基础">1 基础</h2>
+<h3 id="11-安装-hyprland">1.1 安装 Hyprland</h3>
+<p>安装依赖</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S hyprland
+</span></span></code></pre></div><p>复制配置文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -pv ~/.config/hypr
+</span></span><span class="line"><span class="cl">cp /usr/share/hyprland/hyprland.conf ~/.config/hypr
+</span></span></code></pre></div><h3 id="12-配置">1.2 配置</h3>
+<p>快捷键绑定</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">bind</span> <span class="o">=</span> SUPER, T, exec, foot --override <span class="nv">shell</span><span class="o">=</span>fish
+</span></span></code></pre></div><p>设置环境变量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nv">env</span> <span class="o">=</span> XCURSOR_SIZE, <span class="m">24</span>
+</span></span></code></pre></div><p>启动</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">exec-once <span class="o">=</span> wl-paste --watch cliphist store
+</span></span></code></pre></div><h2 id="2-其他">2 其他</h2>
+<h3 id="21-终端">2.1 终端</h3>
+<p>① kitty</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S kitty
+</span></span></code></pre></div><p>② fish</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S fish
+</span></span></code></pre></div><h3 id="22-应用启动器">2.2 应用启动器</h3>
+<p>① wofi</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S wofi
+</span></span></code></pre></div><p>② rofi</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S rofi
+</span></span></code></pre></div><p>③ fuzzel</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S fuzzel
+</span></span></code></pre></div><h3 id="23-壁纸">2.3 壁纸</h3>
+<p>① swaybg</p>
+<p>安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S swaybg
+</span></span></code></pre></div><p>设置壁纸</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># ~/.config/hypr/hyprland.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 单壁纸</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$wallpaper_path</span><span class="o">=</span>&lt;你放壁纸的完整路径&gt;
+</span></span><span class="line"><span class="cl">exec-once<span class="o">=</span>swaybg -i <span class="nv">$wallpaper_path</span> -m fill
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 多壁纸</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$wallpaper_dir</span><span class="o">=</span>&lt;你存放壁纸的目录&gt;
+</span></span><span class="line"><span class="cl">exec-once<span class="o">=</span>swaybg -i <span class="k">$(</span>find <span class="nv">$wallpaper_dir</span> -type f <span class="p">|</span> shuf -n 1<span class="k">)</span> -m fill
+</span></span></code></pre></div><p>② hyprpaper</p>
+<p>安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S hpyrpaper
+</span></span></code></pre></div><p>设置壁纸</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># ~/.config/hypr/hyprpaper.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">preload</span> <span class="o">=</span> /home/me/amongus.png
+</span></span><span class="line"><span class="cl"><span class="nv">wallpaper</span> <span class="o">=</span> monitor, /home/me/amongus.png
+</span></span></code></pre></div><h3 id="24-状态栏">2.4 状态栏</h3>
+<p>安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S waybar
+</span></span></code></pre></div><p>设置状态栏</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># ~/.config/hypr/hyprland.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">exec-once <span class="o">=</span> waybar
+</span></span></code></pre></div><h3 id="25-音频">2.5 音频</h3>
+<p>安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S wireplumber
+</span></span></code></pre></div><p>启动</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl --user start wireplumber
+</span></span></code></pre></div><p>获取设备状态</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wpctl status
+</span></span></code></pre></div><p>调节音频音量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+</span></span></code></pre></div><p>设置麦克风静音</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+</span></span></code></pre></div><p>若未识别音频设备，尝试修改开启 alsa.use-ucm</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># ~/.config/wireplumber/wireplumber.conf.d/alsa-vm.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">monitor.alsa.properties <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Use ALSA-Card-Profile devices. They use UCM or the profile</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># configuration to configure the device and mixer settings.</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># alsa.use-acp = true</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Use UCM instead of profile when available. Can be disabled</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># to skip trying to use the UCM profile.</span>
+</span></span><span class="line"><span class="cl">  alsa.use-ucm <span class="o">=</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="26-亮度">2.6 亮度</h3>
+<p>安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S light
+</span></span></code></pre></div><p>增加亮度</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">light -A <span class="m">5</span>
+</span></span></code></pre></div><p>减少亮度</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">light -U <span class="m">5</span>
+</span></span></code></pre></div><p>设置亮度</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">light -S <span class="m">100</span>
+</span></span></code></pre></div><p>若无法调节亮度，尝试将用户加入组</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">usermod -aG video &lt;USERNAME&gt;
+</span></span></code></pre></div><h3 id="27-输入法">2.7 输入法</h3>
+<p>安装 fcitx5</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S fcitx5 fcitx5-chinese-addons fcitx5-qt fcitx5-gtk
+</span></span></code></pre></div><p>修改配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># /etc/environment</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">GTK_IM_MODULE</span><span class="o">=</span>fcitx
+</span></span><span class="line"><span class="cl"><span class="nv">QT_IM_MODULE</span><span class="o">=</span>fcitx
+</span></span><span class="line"><span class="cl"><span class="nv">XMODIFIERS</span><span class="o">=</span>@im<span class="o">=</span>fcitx
+</span></span><span class="line"><span class="cl"><span class="nv">SDL_IM_MODULE</span><span class="o">=</span>fcitx
+</span></span><span class="line"><span class="cl"><span class="nv">GLFW_IM_MODULE</span><span class="o">=</span>ibus
+</span></span></code></pre></div><p>添加输入法（fcitx5-configtool）</p>
+<p>设置输入法</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># ~/.config/hypr/hyprland.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">exec-once<span class="o">=</span>fcitx5 --replace -d
+</span></span></code></pre></div><h3 id="28-文件管理">2.8 文件管理</h3>
+<p>① dolphin</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S dolphin
+</span></span></code></pre></div><p>② nautilus</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S nautilus
+</span></span></code></pre></div><h3 id="29-复制及截图">2.9 复制及截图</h3>
+<p>安装复制工具</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S cliphist wl-clipboard
+</span></span></code></pre></div><p>开启剪贴板监听</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">exec-once <span class="o">=</span> wl-paste --watch cliphist store
+</span></span></code></pre></div><p>安装截图工具</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S slurp grim
+</span></span></code></pre></div><p>配置截图快捷键</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># ~/.config/hypr/hyprland.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$screen_file</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/Pictures/ScreenShot/screen_shot_<span class="k">$(</span>date +%Y%m%d%H%M%S<span class="k">)</span>.png
+</span></span><span class="line"><span class="cl"><span class="nb">bind</span> <span class="o">=</span> , Print, exec, grim <span class="nv">$screen_file</span>
+</span></span><span class="line"><span class="cl"><span class="nb">bind</span> <span class="o">=</span> SHIFT, Print, exec, grim -g <span class="s2">&#34;</span><span class="k">$(</span>slurp<span class="k">)</span><span class="s2">&#34;</span> <span class="nv">$screen_file</span>
+</span></span><span class="line"><span class="cl"><span class="nb">bind</span> <span class="o">=</span> ALT, A, exec, grim -g <span class="s2">&#34;</span><span class="k">$(</span>slurp<span class="k">)</span><span class="s2">&#34;</span> - <span class="p">|</span> wl-copy
+</span></span></code></pre></div><h3 id="210-锁屏">2.10 锁屏</h3>
+<p>安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yay -S hyprlock
+</span></span></code></pre></div><p>配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># ~/.config/hypr/hyprlock.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">background <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">monitor</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">path</span> <span class="o">=</span> /home/me/someImage.png   <span class="c1"># supports png, jpg, webp (no animations, though)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">color</span> <span class="o">=</span> rgba<span class="o">(</span>25, 20, 20, 1.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">blur_passes</span> <span class="o">=</span> <span class="m">0</span> <span class="c1"># 0 disables blurring</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">blur_size</span> <span class="o">=</span> <span class="m">7</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">noise</span> <span class="o">=</span> 0.0117
+</span></span><span class="line"><span class="cl">    <span class="nv">contrast</span> <span class="o">=</span> 0.8916
+</span></span><span class="line"><span class="cl">    <span class="nv">brightness</span> <span class="o">=</span> 0.8172
+</span></span><span class="line"><span class="cl">    <span class="nv">vibrancy</span> <span class="o">=</span> 0.1696
+</span></span><span class="line"><span class="cl">    <span class="nv">vibrancy_darkness</span> <span class="o">=</span> 0.0
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">label <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">monitor</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">text</span> <span class="o">=</span> Hi there, <span class="nv">$USER</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">text_align</span> <span class="o">=</span> center <span class="c1"># center/right or any value for default left. multi-line text alignment inside label container</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">color</span> <span class="o">=</span> rgba<span class="o">(</span>200, 200, 200, 1.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">font_size</span> <span class="o">=</span> <span class="m">25</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">font_family</span> <span class="o">=</span> Noto Sans
+</span></span><span class="line"><span class="cl">    <span class="nv">rotate</span> <span class="o">=</span> <span class="m">0</span> <span class="c1"># degrees, counter-clockwise</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">position</span> <span class="o">=</span> 0, <span class="m">80</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">halign</span> <span class="o">=</span> center
+</span></span><span class="line"><span class="cl">    <span class="nv">valign</span> <span class="o">=</span> center
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">input-field <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">monitor</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">size</span> <span class="o">=</span> 200, <span class="m">50</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">outline_thickness</span> <span class="o">=</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">dots_size</span> <span class="o">=</span> 0.33 <span class="c1"># Scale of input-field height, 0.2 - 0.8</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">dots_spacing</span> <span class="o">=</span> 0.15 <span class="c1"># Scale of dots&#39; absolute size, -1.0 - 1.0</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">dots_center</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">dots_rounding</span> <span class="o">=</span> -1 <span class="c1"># -1 default circle, -2 follow input-field rounding</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">dots_fade_time</span> <span class="o">=</span> <span class="m">200</span> <span class="c1"># Milliseconds until a dot fully fades in</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">dots_text_format</span> <span class="o">=</span> <span class="c1"># Text character used for the input indicator. Leave empty for a rectangle that will be rounded via dots_rounding (default).</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">outer_color</span> <span class="o">=</span> rgb<span class="o">(</span>151515<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">inner_color</span> <span class="o">=</span> rgb<span class="o">(</span>200, 200, 200<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">font_color</span> <span class="o">=</span> rgb<span class="o">(</span>10, 10, 10<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">font_family</span> <span class="o">=</span> Noto Sans <span class="c1"># Font used for placeholder_text, fail_text and dots_text_format.</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">fade_on_empty</span> <span class="o">=</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">fade_timeout</span> <span class="o">=</span> <span class="m">1000</span> <span class="c1"># Milliseconds before fade_on_empty is triggered.</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">placeholder_text</span> <span class="o">=</span> &lt;i&gt;Input Password...&lt;/i&gt; <span class="c1"># Text rendered in the input box when it&#39;s empty.</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">hide_input</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">rounding</span> <span class="o">=</span> -1 <span class="c1"># -1 means complete rounding (circle/oval)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">check_color</span> <span class="o">=</span> rgb<span class="o">(</span>204, 136, 34<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">fail_color</span> <span class="o">=</span> rgb<span class="o">(</span>204, 34, 34<span class="o">)</span> <span class="c1"># if authentication failed, changes outer_color and fail message color</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">fail_text</span> <span class="o">=</span> &lt;i&gt;<span class="nv">$FAIL</span> &lt;b&gt;<span class="o">(</span><span class="nv">$ATTEMPTS</span><span class="o">)</span>&lt;/b&gt;&lt;/i&gt; <span class="c1"># can be set to empty</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">fail_timeout</span> <span class="o">=</span> <span class="m">2000</span> <span class="c1"># milliseconds before fail_text and fail_color disappears</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">fail_transition</span> <span class="o">=</span> <span class="m">300</span> <span class="c1"># transition time in ms between normal outer_color and fail_color</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">capslock_color</span> <span class="o">=</span> -1
+</span></span><span class="line"><span class="cl">    <span class="nv">numlock_color</span> <span class="o">=</span> -1
+</span></span><span class="line"><span class="cl">    <span class="nv">bothlock_color</span> <span class="o">=</span> -1 <span class="c1"># when both locks are active. -1 means don&#39;t change outer color (same for above)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">invert_numlock</span> <span class="o">=</span> <span class="nb">false</span> <span class="c1"># change color if numlock is off</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">swap_font_color</span> <span class="o">=</span> <span class="nb">false</span> <span class="c1"># see below</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">position</span> <span class="o">=</span> 0, -20
+</span></span><span class="line"><span class="cl">    <span class="nv">halign</span> <span class="o">=</span> center
+</span></span><span class="line"><span class="cl">    <span class="nv">valign</span> <span class="o">=</span> center
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-11-02</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/other/chapter5/" data-title="ArchLinux 下 Hyprland 配置"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/other/chapter5/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/other/chapter5/" data-title="ArchLinux 下 Hyprland 配置"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/other/chapter5/" data-title="ArchLinux 下 Hyprland 配置"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/other/chapter5/" data-title="ArchLinux 下 Hyprland 配置"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/other/chapter6/" class="prev" rel="prev" title="Termux 的安装与使用"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Termux 的安装与使用</a>
+            <a href="/posts/other/chapter7/" class="next" rel="next" title="Halium 编译">Halium 编译<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
