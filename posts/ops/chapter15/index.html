@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/ops\/chapter15\/"
-        },"genre": "posts","keywords": "java","wordcount":  551 ,
+        },"genre": "posts","keywords": "java","wordcount":  695 ,
         "url": "http:\/\/example.org\/posts\/ops\/chapter15\/","datePublished": "2024-10-17T10:00:00+08:00","dateModified": "2024-10-17T10:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Maven 打包配置</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-17">2024-10-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;551 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-17">2024-10-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;695 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -118,6 +118,11 @@
       </ul>
     </li>
     <li><a href="#2-其他">2 其他</a></li>
+    <li><a href="#3-问题与解决">3 问题与解决</a>
+      <ul>
+        <li><a href="#本地存在某个-jar-包但是无法打包">本地存在某个 jar 包，但是无法打包</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="介绍">介绍</h2>
@@ -309,6 +314,9 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mvn clean package -DskipTests
 </span></span></code></pre></div><h2 id="2-其他">2 其他</h2>
 <p>使用代码依赖分离的打包方式可以实现代码的增量更新，如更新了某个模块，只需替换对应 jar 包即可。</p>
+<h2 id="3-问题与解决">3 问题与解决</h2>
+<h3 id="本地存在某个-jar-包但是无法打包">本地存在某个 jar 包，但是无法打包</h3>
+<p>因为这个 jar 包是从远程仓库获取的，所以打包的时候 maven 会自动从远程仓库获取此 jar 包，而由于某些原因可能从无法从远程获取此 jar 包，导致打包失败。解决办法：从远程仓库获取的 jar 包，在本地对应的路径下会有一个 _remote.repositories 文件（标记此 jar 包是从远程获取的），删除此文件并重新打包</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

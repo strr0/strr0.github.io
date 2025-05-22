@@ -2,17 +2,18 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://example.org/categories/</loc><lastmod>2025-02-09T14:00:00&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/categories/</loc><lastmod>2025-05-20T15:00:00&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/ops/chapter19/</loc><lastmod>2025-05-20T15:00:00&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/</loc><lastmod>2025-05-20T15:00:00&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/</loc><lastmod>2025-05-20T15:00:00&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/categories/operations/</loc><lastmod>2025-05-20T15:00:00&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/linux/</loc><lastmod>2025-02-09T14:00:00&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/posts/</loc><lastmod>2025-02-09T14:00:00&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/</loc><lastmod>2025-02-09T14:00:00&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/other/chapter12/</loc><lastmod>2025-02-09T14:00:00&#43;08:00</lastmod></url><url>
             <loc>http://example.org/categories/other/</loc><lastmod>2025-02-09T14:00:00&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/</loc><lastmod>2025-02-09T14:00:00&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/other/chapter11/</loc><lastmod>2025-01-05T20:00:00&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/ops/chapter18/</loc><lastmod>2025-01-04T15:00:00&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/mysql/</loc><lastmod>2025-01-04T15:00:00&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/categories/operations/</loc><lastmod>2025-01-04T15:00:00&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/ops/chapter17/</loc><lastmod>2024-12-31T11:00:00&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/java/</loc><lastmod>2024-12-29T23:00:00&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/dev/chapter17/</loc><lastmod>2024-12-29T23:00:00&#43;08:00</lastmod></url><url>

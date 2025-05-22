@@ -3,9 +3,17 @@
         <title>我的全新 Hugo 网站</title>
         <link>http://example.org/</link>
         <description>This is my cool site</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 09 Feb 2025 14:00:00 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 20 May 2025 15:00:00 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Linux 环境下 Hadoop 的安装与使用</title>
+    <link>http://example.org/posts/ops/chapter19/</link>
+    <pubDate>Tue, 20 May 2025 15:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter19/</guid>
+    <description><![CDATA[1 概念 1.1 基本定义 Hadoop 是一个开源的分布式计算平台，允许用户在不了解分布式底层细节的情况下，开发分布式程序，充分利用集群的威力进行高速运算和存储。]]></description>
+</item>
+<item>
     <title>一加 6T 刷入 Windows 及 Linux 等系统</title>
     <link>http://example.org/posts/other/chapter12/</link>
     <pubDate>Sun, 09 Feb 2025 14:00:00 &#43;0800</pubDate>
@@ -76,14 +84,6 @@
     <author>strr0</author>
     <guid>http://example.org/posts/dev/chapter16/</guid>
     <description><![CDATA[介绍 OAuth 协议为用户资源的授权提供了一个安全的、开放而又简易的标准。OAuth 的授权可以使第三方不触及到用户的账号信息（如用户名与密码），即第三]]></description>
-</item>
-<item>
-    <title>Linux 环境下 Docker 的安装与使用</title>
-    <link>http://example.org/posts/ops/chapter1/</link>
-    <pubDate>Sun, 24 Nov 2024 10:00:00 &#43;0800</pubDate>
-    <author>strr0</author>
-    <guid>http://example.org/posts/ops/chapter1/</guid>
-    <description><![CDATA[介绍 Docker Engine 是一种开源容器化技术，用于构建和容器化应用程序。 1 环境要求 64 位系统 内核版本 3.10 及以上 iptables 版本 1.4 及以上 git 版本 1.7 及以上 ps 命令（procps 或]]></description>
 </item>
 </channel>
 </rss>

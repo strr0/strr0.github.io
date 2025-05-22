@@ -90,6 +90,11 @@
     </div><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/dev/chapter8/">MySql 树形查询</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-29">2023-11-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>开发</a></span></div><div class="content">介绍 MySql 树形查询 1 示例 1.1 查询所有子节点 select id from( select id, parent_id, if(find_in_set(parent_id, @pids) &gt; 0, @pids := concat(@pids, &#39;,&#39;, id), 0) ischild from (select id, parent_id from ${treeTableName} order by parent_id, id) t1, (select @pids := #{pid}) t2) t3 where ischild != 0 1.2 查询所有父节点 select t4.* from ( select @r</div><div class="post-footer">
+        <a href="/posts/dev/chapter8/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/mysql/">MySQL</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/dev/chapter7/">Spring 事件驱动</a>
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-08">2023-11-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>开发</a></span></div><div class="content">介绍 事件驱动是指在持续事务管理过程中，进行决策的一种策略，即跟随当前时间点上出现的事件，调动可用资源，执行相关任务，使不断出现的问题得以解决</div><div class="post-footer">
         <a href="/posts/dev/chapter7/">Read More</a><div class="post-tags">
@@ -114,10 +119,6 @@
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-10-11">2023-10-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div><div class="content">介绍 ByConity 是面向现代 IT 架构变化而设计的一款数仓系统，它采用云原生架构设计，在满足数仓用户对资源弹性扩缩容，读写分离，资源隔离，数据强一致性等多种</div><div class="post-footer">
         <a href="/posts/ops/chapter7/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/other/chapter4/">基于 OpenCore 引导的黑苹果安装</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-10-01">2023-10-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/other/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>其他</a></span></div><div class="content">介绍 本教程基于 OpenCore 官方教程，开始之前需要确认你的硬件是否支持，其次确认你是否真的需要黑苹果，最后确保你有足够的时间和耐心。 1 安装 1.1 准备 4G 及以上</div><div class="post-footer">
-        <a href="/posts/other/chapter4/">Read More</a></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
