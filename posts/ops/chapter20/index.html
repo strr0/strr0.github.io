@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/ops\/chapter20\/"
-        },"genre": "posts","wordcount":  825 ,
+        },"genre": "posts","wordcount":  972 ,
         "url": "http:\/\/example.org\/posts\/ops\/chapter20\/","datePublished": "2025-05-27T10:00:00+08:00","dateModified": "2025-05-27T10:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux 环境下 Canal 的安装与使用</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-05-27">2025-05-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;825 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-05-27">2025-05-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;972 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -120,6 +120,11 @@
     <li><a href="#2-使用">2 使用</a>
       <ul>
         <li><a href="#21-canal-client">2.1 Canal Client</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-问题与解决">3 问题与解决</a>
+      <ul>
+        <li><a href="#使用-docker-运行-mysql-和-canal-无法监测到-binlog">使用 docker 运行 mysql 和 canal 无法监测到 binlog</a></li>
       </ul>
     </li>
   </ul>
@@ -229,8 +234,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    -p 8089:8089 <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e server.port<span class="o">=</span><span class="m">8089</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e canal.adminUser<span class="o">=</span>admin <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e canal.adminPasswd<span class="o">=</span>admin
-</span></span><span class="line"><span class="cl">    canal/canal-admin:v1.1.8
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e canal.adminPasswd<span class="o">=</span>admin <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    canal/canal-admin:v1.1.8
 </span></span></code></pre></div><p>访问 web 界面 <a href="http://localhost:8089" target="_blank" rel="noopener noreffer ">http://localhost:8089</a></p>
 <h2 id="2-使用">2 使用</h2>
 <h3 id="21-canal-client">2.1 Canal Client</h3>
@@ -323,7 +328,12 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">column</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; : &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">column</span><span class="p">.</span><span class="na">getValue</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;    update=&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">column</span><span class="p">.</span><span class="na">getUpdated</span><span class="p">());</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+</span></span></span></code></pre></div><h2 id="3-问题与解决">3 问题与解决</h2>
+<h3 id="使用-docker-运行-mysql-和-canal-无法监测到-binlog">使用 docker 运行 mysql 和 canal 无法监测到 binlog</h3>
+<p>可能是由于数据库连接配置问题导致的，在 docker 环境下 canal 不能直接通过 127.0.0.1 连接到 mysql，需要通过容器名访问（前提是 canal 和 mysql 已经连接到同一个 docker network），如 mysql 的容器名为 mysql-server，则通过 mysql-server:3306 访问</p>
+<p>如果不是上述问题导致，需要根据实际 canal-server 的日志排查</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tail -100f canal-server/logs/example/example.log
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
