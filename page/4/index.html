@@ -90,6 +90,11 @@
     </div><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/ops/chapter15/">Maven 打包配置</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-10-17">2024-10-17</time></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div><div class="content">介绍 Maven 打包 1 使用 1.1 常规方式（代码依赖不分离） 插件如下 插件 版本 备注 spring-boot-maven-plugin 3.1.7 项目代码打包 1.1.1 添加打包插件 &lt;plugin&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; &lt;version&gt;${spring-boot.version}&lt;/version&gt; &lt;executions&gt; &lt;execution&gt; &lt;goals&gt; &lt;goal&gt;repackage&lt;/goal&gt; &lt;/goals&gt; &lt;/execution&gt; &lt;/executions&gt; &lt;/plugin&gt; 1.1.2 运行打包命令 运行打包</div><div class="post-footer">
+        <a href="/posts/ops/chapter15/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/java/">Java</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/dev/chapter15/">Spring 整合 Minio</a>
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-10-12">2024-10-12</time></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>开发</a></span></div><div class="content">介绍 对象存储 1 环境配置 参考 Minio 安装 2 示例 2.1 Spring 配置 添加 application 配置 minio: url: http://localhost:9000 accessKey: admin secretKey: password bucketName: xxx 定义配置类 OssProperties（用于获取配置信息） @Component @ConfigurationProperties(&#34;minio&#34;) public class OssProperties</div><div class="post-footer">
         <a href="/posts/dev/chapter15/">Read More</a><div class="post-tags">
@@ -114,11 +119,6 @@
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-12">2024-07-12</time></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div><div class="content">介绍 Jenkins 是一个开源软件项目，是基于 Java 开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件项目可以进行持续集成</div><div class="post-footer">
         <a href="/posts/ops/chapter13/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/dev/chapter12/">基于 Sa-Token 实现单点登录</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-06-16">2024-06-16</time></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>开发</a></span></div><div class="content">1 介绍 1.1 Sa-Token Sa-Token 是一个轻量级 Java 权限认证框架，主要解决：登录认证、权限认证、单点登录、OAuth2.0、分布式Session会话、微服务网关鉴权等</div><div class="post-footer">
-        <a href="/posts/dev/chapter12/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/java/">Java</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>

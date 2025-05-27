@@ -3,9 +3,17 @@
         <title>我的全新 Hugo 网站</title>
         <link>http://example.org/</link>
         <description>This is my cool site</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 20 May 2025 15:00:00 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 27 May 2025 10:00:00 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Linux 环境下 Canal 的安装与使用</title>
+    <link>http://example.org/posts/ops/chapter20/</link>
+    <pubDate>Tue, 27 May 2025 10:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter20/</guid>
+    <description><![CDATA[介绍 阿里巴巴 MySQL binlog 增量订阅 &amp; 消费组件，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费 1 快速开始 1.1 准备 对于自建 MySQL , 需要先开启 Binlog 写入功]]></description>
+</item>
+<item>
     <title>Linux 环境下 Hadoop 的安装与使用</title>
     <link>http://example.org/posts/ops/chapter19/</link>
     <pubDate>Tue, 20 May 2025 15:00:00 &#43;0800</pubDate>
@@ -76,14 +84,6 @@
     <author>strr0</author>
     <guid>http://example.org/posts/other/chapter9/</guid>
     <description><![CDATA[介绍 世界上最快的网站构建框架 1 环境配置 1.1 根据操作系统和架构下载对应的二进制包 1.2 解压压缩包 1.3 移动可执行文件到合适的路径 1.4 添加该路径到环境变量 PATH]]></description>
-</item>
-<item>
-    <title>Spring 整合 OAuth2</title>
-    <link>http://example.org/posts/dev/chapter16/</link>
-    <pubDate>Sat, 21 Dec 2024 23:00:00 &#43;0800</pubDate>
-    <author>strr0</author>
-    <guid>http://example.org/posts/dev/chapter16/</guid>
-    <description><![CDATA[介绍 OAuth 协议为用户资源的授权提供了一个安全的、开放而又简易的标准。OAuth 的授权可以使第三方不触及到用户的账号信息（如用户名与密码），即第三]]></description>
 </item>
 </channel>
 </rss>

@@ -3,7 +3,15 @@
         <title>运维 - Category - 我的全新 Hugo 网站</title>
         <link>http://example.org/categories/operations/</link>
         <description>运维 - Category - 我的全新 Hugo 网站</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 20 May 2025 15:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/operations/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 27 May 2025 10:00:00 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/operations/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux 环境下 Canal 的安装与使用</title>
+    <link>http://example.org/posts/ops/chapter20/</link>
+    <pubDate>Tue, 27 May 2025 10:00:00 &#43;0800</pubDate>
+    <author>strr0</author>
+    <guid>http://example.org/posts/ops/chapter20/</guid>
+    <description><![CDATA[介绍 阿里巴巴 MySQL binlog 增量订阅 &amp; 消费组件，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费 1 快速开始 1.1 准备 对于自建 MySQL , 需要先开启 Binlog 写入功]]></description>
+</item>
+<item>
     <title>Linux 环境下 Hadoop 的安装与使用</title>
     <link>http://example.org/posts/ops/chapter19/</link>
     <pubDate>Tue, 20 May 2025 15:00:00 &#43;0800</pubDate>
@@ -74,14 +82,6 @@
     <author>strr0</author>
     <guid>http://example.org/posts/ops/chapter14/</guid>
     <description><![CDATA[介绍 MinIO 是一种高性能、S3 兼容的对象存储。 1 安装 1.1 通过源码安装 1.1.1 下载 wget https://dl.minio.org.cn/server/minio/release/linux-amd64/minio chmod +x minio sudo mv minio /usr/local/bin/ 1.1.2 启动 MINIO_ROOT_USER=admin MINIO_ROOT_PASSWORD=password minio server /data --address &#34;:9000&#34; --console-address &#34;:9001&#34; 1.2 通过 Docker 安装 1.2.1 拉取镜像 docker pull minio/minio:RELEASE.2023-03-24T21-41-23Z 1.2.2 运]]></description>
-</item>
-<item>
-    <title>Jenkins 自动化部署</title>
-    <link>http://example.org/posts/ops/chapter13/</link>
-    <pubDate>Fri, 12 Jul 2024 15:00:00 &#43;0800</pubDate>
-    <author>strr0</author>
-    <guid>http://example.org/posts/ops/chapter13/</guid>
-    <description><![CDATA[介绍 Jenkins 是一个开源软件项目，是基于 Java 开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件项目可以进行持续集成]]></description>
 </item>
 </channel>
 </rss>
