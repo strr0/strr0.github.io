@@ -10,8 +10,8 @@
 <meta property="og:url" content="http://example.org/posts/dev/chapter1/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-04T20:30:00+08:00" />
 <meta property="article:modified_time" content="2022-01-04T20:30:00+08:00" /><meta property="og:site_name" content="My cool site" />
-
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Spring Cloud 实战"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spring Cloud 实战"/>
 <meta name="twitter:description" content="介绍 微服务 1 依赖说明 依赖 版本 Spring Boot 2.4.0 Spring Cloud 2020.0.0 2 配置中心 2.1 配置中心配置 2.1.1 服务端 依赖配置 &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-config&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-config-server&lt;/artifactId&gt; &lt;/dependency&gt; application 配置 server: port: 8888 spring: profiles: active: native cloud: config: server: native: search-locations: classpath:config/licensingservice # 多个可使用"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -199,14 +199,14 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">native</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">search-locations</span><span class="p">:</span><span class="w"> </span><span class="l">classpath:config/licensingservice   </span><span class="w"> </span><span class="c"># 多个可使用 &#39;,&#39; 隔开</span><span class="w">
 </span></span></span></code></pre></div><p>启动类</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@SpringBootApplication</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@EnableConfigServer</span><span class="w">    </span><span class="c1">// 开启配置中心服务</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConfigServerApplication</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">ConfigServerApplication</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>启动后访问 <code>http://localhost:8888/&lt;service&gt;/default</code> 可查看服务配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@SpringBootApplication</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@EnableConfigServer</span>    <span class="c1">// 开启配置中心服务
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConfigServerApplication</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="n">ConfigServerApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>启动后访问 <code>http://localhost:8888/&lt;service&gt;/default</code> 可查看服务配置</p>
 <h4 id="212-配置中心客户端">2.1.2 配置中心客户端</h4>
 <p>依赖配置</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependency&gt;</span>
@@ -234,14 +234,14 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">config</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l">http://localhost:8888</span><span class="w">
 </span></span></span></code></pre></div><p>启动类</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@SpringBootApplication</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@RefreshScope</span><span class="w">    </span><span class="c1">// 开启配置刷新，访问 refresh 可刷新</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Application</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h3 id="22-配置中心加密配置">2.2 配置中心加密配置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@SpringBootApplication</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@RefreshScope</span>    <span class="c1">// 开启配置刷新，访问 refresh 可刷新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="n">Application</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="22-配置中心加密配置">2.2 配置中心加密配置</h3>
 <h4 id="221-环境配置">2.2.1 环境配置</h4>
 <p>下载无长度限制的 <a href="http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html" target="_blank" rel="noopener noreffer ">jce_policy-8</a></p>
 <p>解压并替换 jre/secret 下的同名文件</p>
@@ -314,14 +314,14 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 等待时间</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">wait-time-in-ms-when-sync-empty</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
 </span></span></span></code></pre></div><p>启动类</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@SpringBootApplication</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@EnableEurekaServer</span><span class="w">    </span><span class="c1">// 开启注册中心服务</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EurekaServerApplication</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">ConfigServerApplication</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>启动后访问 <a href="http://localhost:8761/eureka/apps" target="_blank" rel="noopener noreffer ">http://localhost:8761/eureka/apps</a> 可查看所有已注册服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@SpringBootApplication</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@EnableEurekaServer</span>    <span class="c1">// 开启注册中心服务
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EurekaServerApplication</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="n">ConfigServerApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>启动后访问 <a href="http://localhost:8761/eureka/apps" target="_blank" rel="noopener noreffer ">http://localhost:8761/eureka/apps</a> 可查看所有已注册服务</p>
 <h4 id="312-客户端">3.1.2 客户端</h4>
 <p>依赖配置</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependency&gt;</span>
@@ -347,59 +347,59 @@
 <h3 id="32-服务发现">3.2 服务发现</h3>
 <h4 id="321-discoveryclient-方式">3.2.1 DiscoveryClient 方式</h4>
 <p>通过 DiscoveryClient 获取服务实例进行访问（需要在启动类上添加 @EnableDiscoveryClient 注解开启服务发现）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrganizationDiscoveryClient</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DiscoveryClient</span><span class="w"> </span><span class="n">discoveryClient</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Autowired</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">OrganizationDiscoveryClient</span><span class="p">(</span><span class="n">DiscoveryClient</span><span class="w"> </span><span class="n">discoveryClient</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">discoveryClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">discoveryClient</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Organization</span><span class="w"> </span><span class="nf">getOrganization</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">organizationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">RestTemplate</span><span class="w"> </span><span class="n">restTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RestTemplate</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ServiceInstance</span><span class="o">&gt;</span><span class="w"> </span><span class="n">instances</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">discoveryClient</span><span class="p">.</span><span class="na">getInstances</span><span class="p">(</span><span class="s">&#34;organizationservice&#34;</span><span class="p">);</span><span class="w">    </span><span class="c1">// organizationservice 为服务名称</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instances</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">serviceUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&#34;%s/v1/organizations/%s&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">instances</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">0</span><span class="p">).</span><span class="na">getUri</span><span class="p">().</span><span class="na">toString</span><span class="p">(),</span><span class="w"> </span><span class="n">organizationId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">Organization</span><span class="o">&gt;</span><span class="w"> </span><span class="n">exchange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="n">serviceUri</span><span class="p">,</span><span class="w"> </span><span class="n">HttpMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">Organization</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">exchange</span><span class="p">.</span><span class="na">getBody</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h4 id="322-resttemplate-方式">3.2.2 RestTemplate 方式</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrganizationDiscoveryClient</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">DiscoveryClient</span> <span class="n">discoveryClient</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Autowired</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">OrganizationDiscoveryClient</span><span class="o">(</span><span class="n">DiscoveryClient</span> <span class="n">discoveryClient</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">discoveryClient</span> <span class="o">=</span> <span class="n">discoveryClient</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Organization</span> <span class="nf">getOrganization</span><span class="o">(</span><span class="n">String</span> <span class="n">organizationId</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">RestTemplate</span> <span class="n">restTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RestTemplate</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">ServiceInstance</span><span class="o">&gt;</span> <span class="n">instances</span> <span class="o">=</span> <span class="n">discoveryClient</span><span class="o">.</span><span class="na">getInstances</span><span class="o">(</span><span class="s">&#34;organizationservice&#34;</span><span class="o">);</span>    <span class="c1">// organizationservice 为服务名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">instances</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">serviceUri</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&#34;%s/v1/organizations/%s&#34;</span><span class="o">,</span> <span class="n">instances</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getUri</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="n">organizationId</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">Organization</span><span class="o">&gt;</span> <span class="n">exchange</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">exchange</span><span class="o">(</span><span class="n">serviceUri</span><span class="o">,</span> <span class="n">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">Organization</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">exchange</span><span class="o">.</span><span class="na">getBody</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h4 id="322-resttemplate-方式">3.2.2 RestTemplate 方式</h4>
 <p>通过 RestTemplate 访问（需要在 RestTemplate Bean 上添加 @LoadBalanced 告诉 Spring 创建一个支持 Ribbon 的 Bean）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrganizationRestTemplateClient</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RestTemplate</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Autowired</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">OrganizationRestTemplateClient</span><span class="p">(</span><span class="n">RestTemplate</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">restTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Organization</span><span class="w"> </span><span class="nf">getOrganization</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">organizationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// organizationservice 为服务名称</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">Organization</span><span class="o">&gt;</span><span class="w"> </span><span class="n">exchange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="s">&#34;http://organizationservice/v1/organizations/{organizationId}&#34;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">HttpMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="kc">null</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">Organization</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">organizationId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">exchange</span><span class="p">.</span><span class="na">getBody</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h4 id="323-feighclient-方式">3.2.3 FeighClient 方式</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrganizationRestTemplateClient</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">RestTemplate</span> <span class="n">restTemplate</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Autowired</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">OrganizationRestTemplateClient</span><span class="o">(</span><span class="n">RestTemplate</span> <span class="n">restTemplate</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">restTemplate</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Organization</span> <span class="nf">getOrganization</span><span class="o">(</span><span class="n">String</span> <span class="n">organizationId</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// organizationservice 为服务名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">Organization</span><span class="o">&gt;</span> <span class="n">exchange</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">exchange</span><span class="o">(</span><span class="s">&#34;http://organizationservice/v1/organizations/{organizationId}&#34;</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                <span class="kc">null</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Organization</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">organizationId</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">exchange</span><span class="o">.</span><span class="na">getBody</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h4 id="323-feighclient-方式">3.2.3 FeighClient 方式</h4>
 <p>通过 Feign 访问（需要在启动类上添加 @EnableFeignClients 注解开启 Feign）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@FeignClient</span><span class="p">(</span><span class="s">&#34;organizationservice&#34;</span><span class="p">)</span><span class="w">    </span><span class="c1">// organizationservice 为服务名称</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">OrganizationFeignClient</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;/v1/organizations/{organizationId}&#34;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">consumes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;application/json&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Organization</span><span class="w"> </span><span class="nf">getOrganization</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&#34;organizationId&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">organizationId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h2 id="4-断路器">4 断路器</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@FeignClient</span><span class="o">(</span><span class="s">&#34;organizationservice&#34;</span><span class="o">)</span>    <span class="c1">// organizationservice 为服务名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">OrganizationFeignClient</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@RequestMapping</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">value</span> <span class="o">=</span> <span class="s">&#34;/v1/organizations/{organizationId}&#34;</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">consumes</span> <span class="o">=</span> <span class="s">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Organization</span> <span class="nf">getOrganization</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">&#34;organizationId&#34;</span><span class="o">)</span> <span class="n">String</span> <span class="n">organizationId</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h2 id="4-断路器">4 断路器</h2>
 <h3 id="41-断路器配置">4.1 断路器配置</h3>
 <p>由于 Spring Cloud 2020 已移除 Hystrix，更换如下版本</p>
 <table>
@@ -429,55 +429,55 @@
 <h3 id="42-三种弹性模式">4.2 三种弹性模式</h3>
 <h4 id="421-断路器模式">4.2.1 断路器模式</h4>
 <p>杀死运行缓慢和退化的系统调用，调用快速失败，防止资源枯竭</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@HystrixCommand</span><span class="p">(</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">commandProperties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 设置超时</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nd">@HystrixProperty</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;execution.isolation.thread.timeoutInMilliseconds&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;12000&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">License</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getLicensesByOrg</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">organizationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">randomlyRunLong</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">licenseRepository</span><span class="p">.</span><span class="na">findByOrganizationId</span><span class="p">(</span><span class="n">organizationId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h4 id="422-回退模式">4.2.2 回退模式</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@HystrixCommand</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">commandProperties</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 设置超时
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nd">@HystrixProperty</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#34;execution.isolation.thread.timeoutInMilliseconds&#34;</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">&#34;12000&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">License</span><span class="o">&gt;</span> <span class="nf">getLicensesByOrg</span><span class="o">(</span><span class="n">String</span> <span class="n">organizationId</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">randomlyRunLong</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">licenseRepository</span><span class="o">.</span><span class="na">findByOrganizationId</span><span class="o">(</span><span class="n">organizationId</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h4 id="422-回退模式">4.2.2 回退模式</h4>
 <p>调用失败或调用的断路器失败时定义的替代代码路径</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@HystrixCommand</span><span class="p">(</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 设置回退</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">fallbackMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;buildFallbackLicenseList&#34;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">License</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getLicensesByOrg</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">organizationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">randomlyRunLong</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">licenseRepository</span><span class="p">.</span><span class="na">findByOrganizationId</span><span class="p">(</span><span class="n">organizationId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 回退</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">License</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">buildFallbackLicenseList</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">organizationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">License</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fallbackList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">License</span><span class="w"> </span><span class="n">license</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">License</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">withId</span><span class="p">(</span><span class="s">&#34;0000000-00-00000&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">withOrganizationId</span><span class="p">(</span><span class="w"> </span><span class="n">organizationId</span><span class="w"> </span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">withProductName</span><span class="p">(</span><span class="s">&#34;Sorry no licensing information currently available&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">fallbackList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">license</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">fallbackList</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h4 id="423-舱壁模式">4.2.3 舱壁模式</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@HystrixCommand</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置回退
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">fallbackMethod</span> <span class="o">=</span> <span class="s">&#34;buildFallbackLicenseList&#34;</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">License</span><span class="o">&gt;</span> <span class="nf">getLicensesByOrg</span><span class="o">(</span><span class="n">String</span> <span class="n">organizationId</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">randomlyRunLong</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">licenseRepository</span><span class="o">.</span><span class="na">findByOrganizationId</span><span class="o">(</span><span class="n">organizationId</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 回退
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">License</span><span class="o">&gt;</span> <span class="nf">buildFallbackLicenseList</span><span class="o">(</span><span class="n">String</span> <span class="n">organizationId</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">License</span><span class="o">&gt;</span> <span class="n">fallbackList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">License</span> <span class="n">license</span> <span class="o">=</span> <span class="k">new</span> <span class="n">License</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="na">withId</span><span class="o">(</span><span class="s">&#34;0000000-00-00000&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="na">withOrganizationId</span><span class="o">(</span> <span class="n">organizationId</span> <span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="na">withProductName</span><span class="o">(</span><span class="s">&#34;Sorry no licensing information currently available&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">fallbackList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">license</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">fallbackList</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h4 id="423-舱壁模式">4.2.3 舱壁模式</h4>
 <p>调用隔离在自己的线程池，防止吞噬所有资源</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@HystrixCommand</span><span class="p">(</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 线程池名称</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">threadPoolKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;licenseByOrgThreadPool&#34;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">threadPoolProperties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 核心线程数</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nd">@HystrixProperty</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;coreSize&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;30&#34;</span><span class="p">),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 请求队列</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nd">@HystrixProperty</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;maxQueueSize&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;10&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">License</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getLicensesByOrg</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">organizationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">randomlyRunLong</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">licenseRepository</span><span class="p">.</span><span class="na">findByOrganizationId</span><span class="p">(</span><span class="n">organizationId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h2 id="5-路由">5 路由</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@HystrixCommand</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 线程池名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">threadPoolKey</span> <span class="o">=</span> <span class="s">&#34;licenseByOrgThreadPool&#34;</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">threadPoolProperties</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 核心线程数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nd">@HystrixProperty</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#34;coreSize&#34;</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">&#34;30&#34;</span><span class="o">),</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 请求队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nd">@HystrixProperty</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#34;maxQueueSize&#34;</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">&#34;10&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">License</span><span class="o">&gt;</span> <span class="nf">getLicensesByOrg</span><span class="o">(</span><span class="n">String</span> <span class="n">organizationId</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">randomlyRunLong</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">licenseRepository</span><span class="o">.</span><span class="na">findByOrganizationId</span><span class="o">(</span><span class="n">organizationId</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h2 id="5-路由">5 路由</h2>
 <h3 id="51-路由配置">5.1 路由配置</h3>
 <p>依赖配置</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependency&gt;</span>
@@ -532,24 +532,24 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">http://licensestatic:8081</span><span class="w">
 </span></span></span></code></pre></div><h3 id="53-过滤器">5.3 过滤器</h3>
 <p>Zuul 有三种过滤器：前置过滤器、后置过滤器、路由过滤器</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TrackingFilter</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ZuulFilter</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ZuulException</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isCorrelationIdPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&#34;tmx-correlation-id found in tracking filter: %s. &#34;</span><span class="p">,</span><span class="w"> </span><span class="n">filterUtil</span><span class="p">.</span><span class="na">getCorrelationId</span><span class="p">()));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">else</span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">filterUtil</span><span class="p">.</span><span class="na">setCorrelationId</span><span class="p">(</span><span class="n">generateCorrelationId</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&#34;tmx-correlation-id generated in tracking filter: %s.&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">filterUtil</span><span class="p">.</span><span class="na">getCorrelationId</span><span class="p">()));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&#34;Processing incoming request for %s.&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">filterUtil</span><span class="p">.</span><span class="na">getRequestURI</span><span class="p">()));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h2 id="6-微服务安全">6 微服务安全</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TrackingFilter</span> <span class="kd">extends</span> <span class="n">ZuulFilter</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">run</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ZuulException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">isCorrelationIdPresent</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&#34;tmx-correlation-id found in tracking filter: %s. &#34;</span><span class="o">,</span> <span class="n">filterUtil</span><span class="o">.</span><span class="na">getCorrelationId</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">filterUtil</span><span class="o">.</span><span class="na">setCorrelationId</span><span class="o">(</span><span class="n">generateCorrelationId</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&#34;tmx-correlation-id generated in tracking filter: %s.&#34;</span><span class="o">,</span> <span class="n">filterUtil</span><span class="o">.</span><span class="na">getCorrelationId</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&#34;Processing incoming request for %s.&#34;</span><span class="o">,</span> <span class="n">filterUtil</span><span class="o">.</span><span class="na">getRequestURI</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h2 id="6-微服务安全">6 微服务安全</h2>
 <p>参考 <a href="/posts/dev/chapter16" rel="">Spring 整合 OAuth2</a></p>
 <h2 id="7-事件驱动">7 事件驱动</h2>
 <h3 id="71-生产者配置">7.1 生产者配置</h3>
@@ -576,34 +576,34 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c"># zkNodes: localhost</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">brokers</span><span class="p">:</span><span class="w"> </span><span class="l">localhost:9092</span><span class="w">
 </span></span></span></code></pre></div><p>输出管道</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">CustomSource</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">OUTPUT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;outboundOrgChanges&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Output</span><span class="p">(</span><span class="n">OUTPUT</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">MessageChannel</span><span class="w"> </span><span class="nf">output</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>生产者</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@EnableBinding</span><span class="p">(</span><span class="n">CustomSource</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SimpleSourceBean</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CustomSource</span><span class="w"> </span><span class="n">customSource</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">SimpleSourceBean</span><span class="p">(</span><span class="n">CustomSource</span><span class="w"> </span><span class="n">customSource</span><span class="p">){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">customSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">customSource</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">publishOrgChange</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">action</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">orgId</span><span class="p">){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&#34;Sending Kafka message %s for Organization Id: %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">action</span><span class="p">,</span><span class="w"> </span><span class="n">orgId</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">OrganizationChangeModel</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="n">OrganizationChangeModel</span><span class="p">(</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">OrganizationChangeModel</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getTypeName</span><span class="p">(),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">action</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">orgId</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;CorrelationId&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">customSource</span><span class="p">.</span><span class="na">output</span><span class="p">().</span><span class="na">send</span><span class="p">(</span><span class="n">MessageBuilder</span><span class="p">.</span><span class="na">withPayload</span><span class="p">(</span><span class="n">change</span><span class="p">).</span><span class="na">build</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h3 id="72-消费者配置">7.2 消费者配置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomSource</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">OUTPUT</span> <span class="o">=</span> <span class="s">&#34;outboundOrgChanges&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Output</span><span class="o">(</span><span class="n">OUTPUT</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MessageChannel</span> <span class="nf">output</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>生产者</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@EnableBinding</span><span class="o">(</span><span class="n">CustomSource</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleSourceBean</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">CustomSource</span> <span class="n">customSource</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">SimpleSourceBean</span><span class="o">(</span><span class="n">CustomSource</span> <span class="n">customSource</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">customSource</span> <span class="o">=</span> <span class="n">customSource</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">publishOrgChange</span><span class="o">(</span><span class="n">String</span> <span class="n">action</span><span class="o">,</span> <span class="n">String</span> <span class="n">orgId</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&#34;Sending Kafka message %s for Organization Id: %s&#34;</span><span class="o">,</span> <span class="n">action</span><span class="o">,</span> <span class="n">orgId</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">OrganizationChangeModel</span> <span class="n">change</span> <span class="o">=</span>  <span class="k">new</span> <span class="n">OrganizationChangeModel</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">OrganizationChangeModel</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getTypeName</span><span class="o">(),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">action</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">orgId</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;CorrelationId&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">customSource</span><span class="o">.</span><span class="na">output</span><span class="o">().</span><span class="na">send</span><span class="o">(</span><span class="n">MessageBuilder</span><span class="o">.</span><span class="na">withPayload</span><span class="o">(</span><span class="n">change</span><span class="o">).</span><span class="na">build</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="72-消费者配置">7.2 消费者配置</h3>
 <p>依赖配置</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependency&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
@@ -628,22 +628,22 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c"># zkNodes: localhost</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">brokers</span><span class="p">:</span><span class="w"> </span><span class="l">localhost:9092</span><span class="w">
 </span></span></span></code></pre></div><p>输入管道</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">CustomSink</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">INPUT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;inboundOrgChanges&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Input</span><span class="p">(</span><span class="n">INPUT</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">SubscribableChannel</span><span class="w"> </span><span class="nf">input</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>消费者</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@EnableBinding</span><span class="p">(</span><span class="n">CustomSink</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrganizationChangeHandler</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@StreamListener</span><span class="p">(</span><span class="n">CustomSink</span><span class="p">.</span><span class="na">INPUT</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">loggerSink</span><span class="p">(</span><span class="n">OrganizationChangeModel</span><span class="w"> </span><span class="n">orgChange</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&#34;Received a message of type %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">orgChange</span><span class="p">.</span><span class="na">getType</span><span class="p">()));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h2 id="8-分布式跟踪">8 分布式跟踪</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomSink</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">INPUT</span> <span class="o">=</span> <span class="s">&#34;inboundOrgChanges&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Input</span><span class="o">(</span><span class="n">INPUT</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SubscribableChannel</span> <span class="nf">input</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>消费者</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@EnableBinding</span><span class="o">(</span><span class="n">CustomSink</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrganizationChangeHandler</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@StreamListener</span><span class="o">(</span><span class="n">CustomSink</span><span class="o">.</span><span class="na">INPUT</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">loggerSink</span><span class="o">(</span><span class="n">OrganizationChangeModel</span> <span class="n">orgChange</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&#34;Received a message of type %s&#34;</span><span class="o">,</span> <span class="n">orgChange</span><span class="o">.</span><span class="na">getType</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h2 id="8-分布式跟踪">8 分布式跟踪</h2>
 <h3 id="81-服务配置">8.1 服务配置</h3>
 <p>添加依赖</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependency&gt;</span>
@@ -661,38 +661,38 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">base-url</span><span class="p">:</span><span class="w"> </span><span class="l">http://localhost:9411</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">discovery-client-enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span></span></span></code></pre></div><p>定义 Bean</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Bean</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">Sampler</span><span class="w"> </span><span class="nf">defaultSampler</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 所有信息输出到 zipkin</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Sampler</span><span class="p">.</span><span class="na">ALWAYS_SAMPLE</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h3 id="82-路由配置">8.2 路由配置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Bean</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">Sampler</span> <span class="nf">defaultSampler</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 所有信息输出到 zipkin
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">Sampler</span><span class="o">.</span><span class="na">ALWAYS_SAMPLE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="82-路由配置">8.2 路由配置</h3>
 <p>添加依赖</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependency&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-sleuth<span class="nt">&lt;/artifactId&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependency&gt;</span>
 </span></span></code></pre></div><p>过滤器配置</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResponseFilter</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ZuulFilter</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Tracer</span><span class="w"> </span><span class="n">tracer</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ResponseFilter</span><span class="p">(</span><span class="n">Tracer</span><span class="w"> </span><span class="n">tracer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">tracer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tracer</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ZuulException</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&#34;Adding the correlation id to the outbound headers. %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">FilterUtil</span><span class="p">.</span><span class="na">getCorrelationId</span><span class="p">()));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 打印 tracer 信息</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">FilterUtil</span><span class="p">.</span><span class="na">addCorrelationId</span><span class="p">(</span><span class="n">tracer</span><span class="p">.</span><span class="na">currentSpan</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&#34;Completing outgoing request for %s.&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">FilterUtil</span><span class="p">.</span><span class="na">getRequestURI</span><span class="p">()));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ResponseFilter</span> <span class="kd">extends</span> <span class="n">ZuulFilter</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Tracer</span> <span class="n">tracer</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">ResponseFilter</span><span class="o">(</span><span class="n">Tracer</span> <span class="n">tracer</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">tracer</span> <span class="o">=</span> <span class="n">tracer</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">run</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ZuulException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&#34;Adding the correlation id to the outbound headers. %s&#34;</span><span class="o">,</span> <span class="n">FilterUtil</span><span class="o">.</span><span class="na">getCorrelationId</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 打印 tracer 信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">FilterUtil</span><span class="o">.</span><span class="na">addCorrelationId</span><span class="o">(</span><span class="n">tracer</span><span class="o">.</span><span class="na">currentSpan</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&#34;Completing outgoing request for %s.&#34;</span><span class="o">,</span> <span class="n">FilterUtil</span><span class="o">.</span><span class="na">getRequestURI</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -718,8 +718,8 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
         </div>
     </footer></div>
 

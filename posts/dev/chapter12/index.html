@@ -10,8 +10,8 @@
 <meta property="og:url" content="http://example.org/posts/dev/chapter12/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-16T14:00:00+08:00" />
 <meta property="article:modified_time" content="2024-06-16T14:00:00+08:00" /><meta property="og:site_name" content="My cool site" />
-
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="基于 Sa-Token 实现单点登录"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="基于 Sa-Token 实现单点登录"/>
 <meta name="twitter:description" content="1 介绍 1.1 Sa-Token Sa-Token 是一个轻量级 Java 权限认证框架，主要解决：登录认证、权限认证、单点登录、OAuth2.0、分布式Session会话、微服务网关鉴权等"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -166,58 +166,58 @@
 </span></span></span></code></pre></div><p>新建 SsoServerController</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * Sa-Token-SSO Server端 Controller 
-</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@RestController</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SsoServerController</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RestTemplate</span><span class="w"> </span><span class="n">restTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RestTemplate</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@RestController</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SsoServerController</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">RestTemplate</span> <span class="n">restTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RestTemplate</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * SSO-Server端：处理所有SSO相关请求 (下面的章节我们会详细列出开放的接口) 
-</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&#34;/sso/*&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">ssoRequest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">SaSsoServerProcessor</span><span class="p">.</span><span class="na">instance</span><span class="p">.</span><span class="na">dister</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/sso/*&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">ssoRequest</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">SaSsoServerProcessor</span><span class="o">.</span><span class="na">instance</span><span class="o">.</span><span class="na">dister</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 配置SSO相关参数 
-</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Autowired</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">configSso</span><span class="p">(</span><span class="n">SaSsoServerConfig</span><span class="w"> </span><span class="n">ssoServer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 配置：未登录时返回的View </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ssoServer</span><span class="p">.</span><span class="na">notLoginView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;当前会话在SSO-Server端尚未登录，请先访问&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;&lt;a href=&#39;/sso/doLogin?name=sa&amp;pwd=123456&#39; target=&#39;_blank&#39;&gt; doLogin登录 &lt;/a&gt;&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;进行登录之后，刷新页面开始授权&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">msg</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 配置：登录处理函数 </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ssoServer</span><span class="p">.</span><span class="na">doLoginHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">pwd</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 此处仅做模拟登录，真实环境应该查询数据进行登录 </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="s">&#34;sa&#34;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s">&#34;123456&#34;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">pwd</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">StpUtil</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="n">10001</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">SaResult</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="s">&#34;登录成功！&#34;</span><span class="p">).</span><span class="na">setData</span><span class="p">(</span><span class="n">StpUtil</span><span class="p">.</span><span class="na">getTokenValue</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">SaResult</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&#34;登录失败！&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 配置 Http 请求处理器 （在模式三的单点注销功能下用到，如不需要可以注释掉） </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ssoServer</span><span class="p">.</span><span class="na">sendHttp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;------ 发起请求：&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">url</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">resStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">.</span><span class="na">getForObject</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;------ 请求结果：&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">resStr</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">resStr</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h3 id="22-sso-客户端">2.2 SSO 客户端</h3>
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Autowired</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">configSso</span><span class="o">(</span><span class="n">SaSsoServerConfig</span> <span class="n">ssoServer</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 配置：未登录时返回的View 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ssoServer</span><span class="o">.</span><span class="na">notLoginView</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">String</span> <span class="n">msg</span> <span class="o">=</span> <span class="s">&#34;当前会话在SSO-Server端尚未登录，请先访问&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">+</span> <span class="s">&#34;&lt;a href=&#39;/sso/doLogin?name=sa&amp;pwd=123456&#39; target=&#39;_blank&#39;&gt; doLogin登录 &lt;/a&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">+</span> <span class="s">&#34;进行登录之后，刷新页面开始授权&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">msg</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">};</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 配置：登录处理函数 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ssoServer</span><span class="o">.</span><span class="na">doLoginHandle</span> <span class="o">=</span> <span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">pwd</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 此处仅做模拟登录，真实环境应该查询数据进行登录 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span><span class="o">(</span><span class="s">&#34;sa&#34;</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="s">&#34;123456&#34;</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">pwd</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">StpUtil</span><span class="o">.</span><span class="na">login</span><span class="o">(</span><span class="mi">10001</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">SaResult</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="s">&#34;登录成功！&#34;</span><span class="o">).</span><span class="na">setData</span><span class="o">(</span><span class="n">StpUtil</span><span class="o">.</span><span class="na">getTokenValue</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">SaResult</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&#34;登录失败！&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">};</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 配置 Http 请求处理器 （在模式三的单点注销功能下用到，如不需要可以注释掉） 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ssoServer</span><span class="o">.</span><span class="na">sendHttp</span> <span class="o">=</span> <span class="n">url</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;------ 发起请求：&#34;</span> <span class="o">+</span> <span class="n">url</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">String</span> <span class="n">resStr</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">getForObject</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;------ 请求结果：&#34;</span> <span class="o">+</span> <span class="n">resStr</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">resStr</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">};</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="22-sso-客户端">2.2 SSO 客户端</h3>
 <p>新建 sso-client 模块（或使用已有的模块）</p>
 <p>引入依赖</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc/ --&gt;</span>
@@ -257,56 +257,56 @@
 </span></span></span></code></pre></div><p>新建 SsoClientController</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * Sa-Token-SSO Client端 Controller 
-</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@RestController</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SsoClientController</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RestTemplate</span><span class="w"> </span><span class="n">restTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RestTemplate</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 首页</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">index</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;&lt;h2&gt;Sa-Token SSO-Client 应用端&lt;/h2&gt;&#34;</span><span class="w"> </span><span class="o">+</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;&lt;p&gt;当前会话是否登录：&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">StpUtil</span><span class="p">.</span><span class="na">isLogin</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;&lt;/p&gt;&#34;</span><span class="w"> </span><span class="o">+</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;&lt;p&gt;&lt;a href=\&#34;javascript:location.href=&#39;/sso/login?back=&#39; + encodeURIComponent(location.href);\&#34;&gt;登录&lt;/a&gt; &#34;</span><span class="w"> </span><span class="o">+</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;&lt;a href=&#39;/sso/logout?back=self&#39;&gt;注销&lt;/a&gt;&lt;/p&gt;&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">str</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@RestController</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SsoClientController</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">RestTemplate</span> <span class="n">restTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RestTemplate</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 首页
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span> <span class="nf">index</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&#34;&lt;h2&gt;Sa-Token SSO-Client 应用端&lt;/h2&gt;&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;&lt;p&gt;当前会话是否登录：&#34;</span> <span class="o">+</span> <span class="n">StpUtil</span><span class="o">.</span><span class="na">isLogin</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;&lt;/p&gt;&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;&lt;p&gt;&lt;a href=\&#34;javascript:location.href=&#39;/sso/login?back=&#39; + encodeURIComponent(location.href);\&#34;&gt;登录&lt;/a&gt; &#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;&lt;a href=&#39;/sso/logout?back=self&#39;&gt;注销&lt;/a&gt;&lt;/p&gt;&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">str</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/*
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * SSO-Client端：处理所有SSO相关请求
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 		http://{host}:{port}/sso/login			-- Client端登录地址，接受参数：back=登录后的跳转地址
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 		http://{host}:{port}/sso/logout			-- Client端单点注销地址（isSlo=true时打开），接受参数：back=注销后的跳转地址
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 		http://{host}:{port}/sso/logoutCall		-- Client端单点注销回调地址（isSlo=true时打开），此接口为框架回调，开发者无需关心
-</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&#34;/sso/*&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">ssoRequest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">SaSsoClientProcessor</span><span class="p">.</span><span class="na">instance</span><span class="p">.</span><span class="na">dister</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 配置SSO相关参数</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Autowired</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">configSso</span><span class="p">(</span><span class="n">SaSsoClientConfig</span><span class="w"> </span><span class="n">ssoClient</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 配置Http请求处理器</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ssoClient</span><span class="p">.</span><span class="na">sendHttp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;------ 发起请求：&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">url</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">resStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">.</span><span class="na">getForObject</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;------ 请求结果：&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">resStr</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">resStr</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h3 id="23-测试及客户端自定义配置">2.3 测试及客户端自定义配置</h3>
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/sso/*&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">ssoRequest</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">SaSsoClientProcessor</span><span class="o">.</span><span class="na">instance</span><span class="o">.</span><span class="na">dister</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 配置SSO相关参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@Autowired</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">configSso</span><span class="o">(</span><span class="n">SaSsoClientConfig</span> <span class="n">ssoClient</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 配置Http请求处理器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ssoClient</span><span class="o">.</span><span class="na">sendHttp</span> <span class="o">=</span> <span class="n">url</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;------ 发起请求：&#34;</span> <span class="o">+</span> <span class="n">url</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">String</span> <span class="n">resStr</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">getForObject</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;------ 请求结果：&#34;</span> <span class="o">+</span> <span class="n">resStr</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">resStr</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">};</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="23-测试及客户端自定义配置">2.3 测试及客户端自定义配置</h3>
 <p>完成上述配置后，分别启动 sso-server 和 sso-client，然后访问 http://localhost:9001 进入客户端首页，点击登录即自动跳转到授权中心，授权中心登录成功后带 ticket 重定向回 /sso/login，此路径为客户端默认登录地址，在没有额外配置的情况下，他会默认对 ticket 进行校验并在校验成功后在客户端登录。<br>
 如果需要对客户端登录做自定义的逻辑操作，首先需要修改跳转到授权中心的 redirect 参数（即重定向地址），然后配置自定义 ticket 处理，如</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 根据ticket进行登录</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&#34;/sso/doLoginByTicket&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">SaResult</span><span class="w"> </span><span class="nf">doLoginByTicket</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">ticket</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">SaCheckTicketResult</span><span class="w"> </span><span class="n">ctr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SaSsoClientProcessor</span><span class="p">.</span><span class="na">instance</span><span class="p">.</span><span class="na">checkTicket</span><span class="p">(</span><span class="n">ticket</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;/sso/doLoginByTicket&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 自定义登录逻辑</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">StpUtil</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="n">ctr</span><span class="p">.</span><span class="na">loginId</span><span class="p">,</span><span class="w"> </span><span class="n">ctr</span><span class="p">.</span><span class="na">remainSessionTimeout</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">SaResult</span><span class="p">.</span><span class="na">data</span><span class="p">(</span><span class="n">StpUtil</span><span class="p">.</span><span class="na">getTokenValue</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 根据ticket进行登录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/sso/doLoginByTicket&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">SaResult</span> <span class="nf">doLoginByTicket</span><span class="o">(</span><span class="n">String</span> <span class="n">ticket</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SaCheckTicketResult</span> <span class="n">ctr</span> <span class="o">=</span> <span class="n">SaSsoClientProcessor</span><span class="o">.</span><span class="na">instance</span><span class="o">.</span><span class="na">checkTicket</span><span class="o">(</span><span class="n">ticket</span><span class="o">,</span> <span class="s">&#34;/sso/doLoginByTicket&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 自定义登录逻辑
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">StpUtil</span><span class="o">.</span><span class="na">login</span><span class="o">(</span><span class="n">ctr</span><span class="o">.</span><span class="na">loginId</span><span class="o">,</span> <span class="n">ctr</span><span class="o">.</span><span class="na">remainSessionTimeout</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">SaResult</span><span class="o">.</span><span class="na">data</span><span class="o">(</span><span class="n">StpUtil</span><span class="o">.</span><span class="na">getTokenValue</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -332,8 +332,8 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
         </div>
     </footer></div>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head>
-	<meta name="generator" content="Hugo 0.123.7">
+	<meta name="generator" content="Hugo 0.111.2">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
@@ -9,8 +9,8 @@
 <meta property="og:description" content="This is my cool site" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://example.org/" /><meta property="og:site_name" content="My cool site" />
-
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="我的全新 Hugo 网站"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="我的全新 Hugo 网站"/>
 <meta name="twitter:description" content="This is my cool site"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -90,6 +90,11 @@
     </div><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/other/chapter8/">三星 note2 刷入 PostmarketOS 系统</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2026-09-04">2026-09-04</time></span>&nbsp;<span class="post-category">included in <a href="/categories/other/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>其他</a></span></div><div class="content">介绍 移动设备及其他平台的 Linux 发行版 1 环境配置 1.1 环境要求 Linux distribution on the host system (Linux kernel 3.17 or higher) Python 3.10+ For python3 &lt; 3.11: tomli OpenSSL git 2.46+ kpartx (from multipath-tools) losetup (with &ndash;json support, e.g. util-linux version) ps tar 1.2 Pmbootstrap 安装 从源码获取 git clone</div><div class="post-footer">
+        <a href="/posts/other/chapter8/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/ops/chapter20/">Linux 环境下 Canal 的安装与使用</a>
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-05-27">2025-05-27</time></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div><div class="content">介绍 阿里巴巴 MySQL binlog 增量订阅 &amp; 消费组件，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费 1 快速开始 1.1 准备 对于自建 MySQL , 需要先开启 Binlog 写入功</div><div class="post-footer">
         <a href="/posts/ops/chapter20/">Read More</a></div>
@@ -112,10 +117,6 @@
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-01-04">2025-01-04</time></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div><div class="content">介绍 关系型数据库 1 安装 1.1 通过二进制包安装 安装依赖 yum install libaio numactl 获取通用二进制包 wget https://downloads.mysql.com/archives/get/p/23/file/mysql-8.0.33-linux-glibc2.28-x86_64.tar.gz 创建 MySQL 组 groupadd -g 27 -o -r mysql 创建 MySQL 用户 useradd -M -N -g mysql -o -r -d /usr/local/mysql/data -s /bin/false -c &#34;MySQL Server&#34; -u 27 mysql</div><div class="post-footer">
         <a href="/posts/ops/chapter18/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/mysql/">MySQL</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/ops/chapter17/">数据库版本管理工具 Liquibase</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/strr0" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>strr0</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-12-31">2024-12-31</time></span>&nbsp;<span class="post-category">included in <a href="/categories/operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>运维</a></span></div><div class="content">介绍 Liquibase 自动化、安全且合规的数据库变更管理管道，可加速交付并减少工作量。 1 配置 1.1 依赖说明 插件 版本 liquibase-maven-plugin 4.26.0 1.2 项目配置 依赖配置 &lt;!-- 需要用到的驱动需要添加</div><div class="post-footer">
-        <a href="/posts/ops/chapter17/">Read More</a></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -136,8 +137,8 @@
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.7">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/strr0" target="_blank">strr0</a></span></div>
         </div>
     </footer></div>
 
